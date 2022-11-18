@@ -1,0 +1,40 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  --first-color: #4a62e4ff;
+  --second-color: #ef865dff;
+  --third-color: #666666ff;
+  --fourth-color: #ffffffff;
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.App {
+  height: 100vh;
+  overflow: scroll;
+  font-family: 'Nunito', sans-serif;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+
+.button {
+  background-color: var(--second-color);
+  font-weight: 100;
+  font-size: 14pt;
+  color: var(--fourth-color);
+  border: none;
+  padding: 15px 45px;
+  border-radius: 30px;
+}
