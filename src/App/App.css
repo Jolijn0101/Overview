@@ -8,6 +8,7 @@
   --second-color: #ef865dff;
   --third-color: #666666ff;
   --fourth-color: #ffffffff;
+  --fifth-color: #92d18dff;
 }
 
 /*=============== BASE ===============*/
@@ -25,6 +26,12 @@ html {
   height: 100vh;
   overflow: scroll;
   font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  word-break: normal;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/

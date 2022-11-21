@@ -1,0 +1,87 @@
+.project {
+  margin: 2rem;
+}
+
+.project h1 {
+  margin-bottom: 2rem;
+}
+
+.project h1:after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: var(--second-color);
+}
+
+.project__todo {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px dotted var(--third-color);
+  padding: 1rem 0rem;
+}
+
+.project__check-box {
+  width: 2em;
+  height: 2em;
+  border: 3px solid var(--third-color);
+  border-radius: 50%;
+  padding: 0.1em;
+  margin-right: 1rem;
+}
+
+.project__check-box svg {
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--fourth-color);
+}
+
+.project__check-box:hover {
+  background-color: var(--fifth-color);
+  border-color: var(--fifth-color);
+}
+
+.project p,
+.project h4 {
+  margin-top: 0.4rem;
+  color: var(--third-color);
+}
+
+.project p {
+  width: calc(100% - 5.5rem);
+}
+
+.dots_ico {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: var(--third-color);
+  margin-left: 1rem;
+  margin-top: 0.3rem;
+}
+
+.project__add-todo {
+  width: 100%;
+  display: flex;
+  padding: 1rem 0rem;
+  border-bottom: 2px solid var(--third-color);
+}
+
+.project__plus-icon {
+  height: 2.3rem;
+  width: 2.3rem;
+  margin-left: -0.1rem;
+  margin-right: 0.8rem;
+  color: var(--fifth-color);
+}
+
+.project__remove-project {
+  display: flex;
+  margin: 1rem 0rem;
+}
+
+.project__trash-icon {
+  color: var(--third-color);
+  margin: 0rem 1rem 0rem 0.2rem;
+}
