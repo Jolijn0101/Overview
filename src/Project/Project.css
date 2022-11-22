@@ -2,6 +2,14 @@
   margin: 0.5rem 2rem 2rem 2rem;
 }
 
+.mobile_menu_btn {
+  margin-left: calc(100% - 2rem);
+  margin-top: 1rem;
+  height: 2rem;
+  width: 2rem;
+  color: var(--third-color);
+}
+
 .project h1 {
   margin-bottom: 2rem;
 }
@@ -14,6 +22,12 @@
   margin-top: 5px;
   border-radius: 5px;
   background-color: var(--second-color);
+}
+
+.project__todo-list,
+.project__add-todo,
+.project__remove-project {
+  max-width: 800px;
 }
 
 .project__todo {
@@ -84,4 +98,14 @@
 .project__trash-icon {
   color: var(--third-color);
   margin: 0rem 1rem 0rem 0.2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .project {
+    padding-left: 15rem;
+  }
+
+  .mobile_menu_btn {
+    visibility: hidden;
+  }
 }

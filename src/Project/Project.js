@@ -1,12 +1,34 @@
 import React from 'react';
 import './Project.css';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSideMenu } from '../Redux/todoistSlice';
 
 const Project = () => {
   let { projectName } = useParams();
+  const dispatch = useDispatch();
+
+  function openSideMenu() {
+    dispatch(setSideMenu(true));
+  }
 
   return (
     <div className="project">
+      <svg
+        onClick={openSideMenu}
+        className="mobile_menu_btn"
+        stroke="currentColor"
+        fill="currentColor"
+        stroke-width="0"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
       <h1>{projectName}</h1>
       <ul className="project__todo-list">
         <li className="project__todo">

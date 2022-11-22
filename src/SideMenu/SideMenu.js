@@ -9,10 +9,14 @@ const SideMenu = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (sideMenu_state === true) {
+    if (window.screen.width >= 768) {
       document.querySelector('.side-menu').style.transform = 'translateX(0)';
-    } else if (sideMenu_state === false) {
-      document.querySelector('.side-menu').style.transform = 'translateX(15rem)';
+    } else {
+      if (sideMenu_state === true) {
+        document.querySelector('.side-menu').style.transform = 'translateX(0)';
+      } else if (sideMenu_state === false) {
+        document.querySelector('.side-menu').style.transform = 'translateX(15rem)';
+      }
     }
   }, [sideMenu_state]);
 

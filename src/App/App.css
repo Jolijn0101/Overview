@@ -58,11 +58,3 @@ a {
 }
 
 /*=============== APP COMPONENT ===============*/
-
-.App .mobile_menu_btn {
-  margin-left: calc(100% - 3rem);
-  margin-top: 1rem;
-  height: 2rem;
-  width: 2rem;
-  color: var(--third-color);
-}

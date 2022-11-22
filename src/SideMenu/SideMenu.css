@@ -65,3 +65,15 @@
   border-radius: 20px;
   border: solid 6px #4a62e4ff;
 }
+
+@media screen and (min-width: 768px) {
+  .side-menu {
+    margin-left: 0rem;
+    margin-top: -0.5rem;
+    transform: translateX(0rem);
+    border-radius: 0px;
+  }
+  .side-menu .closeBtn {
+    visibility: hidden;
+  }
+}
