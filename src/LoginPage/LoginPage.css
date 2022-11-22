@@ -10,7 +10,6 @@
 
 .login_page img {
   width: 70%;
-  max-width: 600px;
 }
 
 .login_page__wrapper {
@@ -30,4 +29,21 @@
 
 .login_page button {
   margin-top: 45px;
+}
+
+@media screen and (min-width: 786px) {
+  .login_page {
+    flex-direction: row;
+  }
+  #notepad_img,
+  .login_page__wrapper {
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  #notepad_img,
+  .login_page__wrapper {
+    width: 40%;
+  }
 }

@@ -14,9 +14,9 @@ const LoginPage = () => {
 
   return (
     <div class="login_page">
-      <img src={notepad} alt="notepad_img" />
+      <img src={notepad} id="notepad_img" alt="notepad_img" />
       <div class="login_page__wrapper">
-        <img src={overview_logo} alt="overview_logo" />
+        <img src={overview_logo} id="overview_logo" alt="overview_logo" />
         <p>a new way to organise your tasks and goals in an easy way</p>
         <button className="button" onClick={logIn}>
           Login
