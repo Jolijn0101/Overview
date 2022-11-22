@@ -1,0 +1,62 @@
+.side-menu {
+  background-color: var(--first-color);
+  height: 100vh;
+  width: 15rem;
+  position: absolute;
+  margin-left: calc(100% - 15rem);
+  border-radius: 15px 0px 0px 15px;
+  padding: 2rem;
+  color: var(--fourth-color);
+  /*transform: translateX(15rem);*/
+  transition: 2s;
+}
+
+.side-menu h3 {
+  font-size: 1.5rem;
+  line-height: 3.5rem;
+}
+
+.side-menu h4 {
+  line-height: 3rem;
+  font-size: 1rem;
+}
+
+.side-menu .project-list {
+  overflow-y: scroll;
+  max-height: 17rem;
+}
+
+.side-menu .project-list li {
+  display: flex;
+  align-items: center;
+}
+
+.side-menu .project-color {
+  width: 2rem;
+  height: 2rem;
+  background-color: coral;
+  border-radius: 50%;
+  border: solid 2.5px var(--fourth-color);
+  margin-right: 0.8rem;
+}
+
+.side-menu .log-out_icon {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.5rem;
+}
+
+.side-menu #log-out {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.side-menu .project-list::-webkit-scrollbar {
+  width: 20px;
+}
+.side-menu .project-list::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: solid 6px #4a62e4ff;
+}

@@ -24,7 +24,9 @@ html {
 
 .App {
   height: 100vh;
-  overflow: scroll;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   font-family: 'Nunito', sans-serif;
 }
 
@@ -32,6 +34,10 @@ h1 {
   font-size: 2rem;
   font-weight: 700;
   word-break: normal;
+}
+
+li {
+  list-style: none;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
@@ -44,4 +50,14 @@ h1 {
   border: none;
   padding: 15px 45px;
   border-radius: 30px;
+}
+
+/*=============== APP COMPONENT ===============*/
+
+.App .mobile_menu_btn {
+  margin-left: calc(100% - 3rem);
+  margin-top: 1rem;
+  height: 2rem;
+  width: 2rem;
+  color: var(--third-color);
 }
