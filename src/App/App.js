@@ -3,12 +3,15 @@ import './App.css';
 import LoginPage from '../LoginPage/LoginPage';
 import Project from '../Project/Project';
 import SideMenu from '../SideMenu/SideMenu';
+import { useDispatch } from 'react-redux';
+import { setSideMenu } from '../Redux/todoistSlice';
 
 function App() {
   const [logIn, setlogin] = useState('');
+  const dispatch = useDispatch();
 
   function openSideMenu() {
-    alert('menu is open');
+    dispatch(setSideMenu(true));
   }
 
   return (

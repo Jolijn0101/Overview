@@ -7,8 +7,13 @@
   border-radius: 15px 0px 0px 15px;
   padding: 2rem;
   color: var(--fourth-color);
-  /*transform: translateX(15rem);*/
-  transition: 2s;
+  transform: translateX(15rem);
+  transition: 0.5s;
+}
+
+.side-menu .closeBtn {
+  margin-left: 10rem;
+  margin-top: -2rem;
 }
 
 .side-menu h3 {
