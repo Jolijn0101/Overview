@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './SideMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { sideMenuState, setSideMenu } from '../Redux/todoistSlice';
+import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
   const sideMenu_state = useSelector(sideMenuState);
@@ -39,29 +40,41 @@ const SideMenu = () => {
       </svg>
       <ul>
         <li>
-          <h3>Inbox</h3>
+          <Link className="link" to={'/Project/Inbox'} onClick={closeSideMenu}>
+            <h3>Inbox</h3>
+          </Link>
         </li>
         <li>
-          <h3>Overview</h3>
+          <Link className="link" to={'/Project/Overview'} onClick={closeSideMenu}>
+            <h3>Overview</h3>
+          </Link>
         </li>
         <li>
           <h3>Projects</h3>
           <ul className="project-list">
             <li>
-              <div className="project-color"></div>
-              <h4>Persoonlijk</h4>
+              <Link className="link" to={'/Project/Persoonlijk'} onClick={closeSideMenu}>
+                <div className="project-color"></div>
+                <h4>Persoonlijk</h4>
+              </Link>
             </li>
             <li>
-              <div className="project-color"></div>
-              <h4>Klussen</h4>
+              <Link className="link" to={'/Project/Klussen'} onClick={closeSideMenu}>
+                <div className="project-color"></div>
+                <h4>Klussen</h4>
+              </Link>
             </li>
             <li>
-              <div className="project-color"></div>
-              <h4>Werk</h4>
+              <Link className="link" to={'/Project/Werk'} onClick={closeSideMenu}>
+                <div className="project-color"></div>
+                <h4>Werk</h4>
+              </Link>
             </li>
             <li>
-              <div className="project-color"></div>
-              <h4>Hobby</h4>
+              <Link className="link" to={'/Project/Hobby'} onClick={closeSideMenu}>
+                <div className="project-color"></div>
+                <h4>Hobby</h4>
+              </Link>
             </li>
           </ul>
         </li>

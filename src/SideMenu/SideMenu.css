@@ -31,7 +31,7 @@
   max-height: 17rem;
 }
 
-.side-menu .project-list li {
+.side-menu .project-list .link {
   display: flex;
   align-items: center;
 }

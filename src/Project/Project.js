@@ -1,10 +1,13 @@
 import React from 'react';
 import './Project.css';
+import { useParams } from 'react-router-dom';
 
 const Project = () => {
+  let { projectName } = useParams();
+
   return (
     <div className="project">
-      <h1>projectName</h1>
+      <h1>{projectName}</h1>
       <ul className="project__todo-list">
         <li className="project__todo">
           <div className="project__check-box">
