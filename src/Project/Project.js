@@ -29,7 +29,7 @@ const Project = () => {
           clip-rule="evenodd"
         ></path>
       </svg>
-      <h1>{projectName}</h1>
+      <h1>{projectName ? projectName : 'Inbox'}</h1>
       <ul className="project__todo-list">
         <li className="project__todo">
           <div className="project__check-box">
