@@ -4,6 +4,7 @@
   width: 15rem;
   position: absolute;
   margin-left: calc(100% - 15rem);
+  margin-top: -0.5rem;
   border-radius: 15px 0px 0px 15px;
   padding: 2rem;
   color: var(--fourth-color);
@@ -14,6 +15,7 @@
 .side-menu .closeBtn {
   margin-left: 10rem;
   margin-top: -2rem;
+  cursor: pointer;
 }
 
 .side-menu h3 {
@@ -55,6 +57,7 @@
   margin-top: 2rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .side-menu .project-list::-webkit-scrollbar {
@@ -69,7 +72,6 @@
 @media screen and (min-width: 768px) {
   .side-menu {
     margin-left: 0rem;
-    margin-top: -0.5rem;
     transform: translateX(0rem);
     border-radius: 0px;
   }

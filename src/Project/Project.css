@@ -8,6 +8,7 @@
   height: 2rem;
   width: 2rem;
   color: var(--third-color);
+  cursor: pointer;
 }
 
 .project h1 {
@@ -80,6 +81,7 @@
   display: flex;
   padding: 1rem 0rem;
   border-bottom: 2px solid var(--third-color);
+  cursor: pointer;
 }
 
 .project__plus-icon {
@@ -93,6 +95,7 @@
 .project__remove-project {
   display: flex;
   margin: 1rem 0rem;
+  cursor: pointer;
 }
 
 .project__trash-icon {

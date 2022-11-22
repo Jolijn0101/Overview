@@ -1,17 +1,18 @@
-import { useState } from 'react';
 import './App.css';
 import LoginPage from '../LoginPage/LoginPage';
 import Project from '../Project/Project';
 import SideMenu from '../SideMenu/SideMenu';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { loggedIn } from '../Redux/todoistSlice';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [logIn, setlogin] = useState('');
+  const logInStatus = useSelector(loggedIn);
 
   return (
     <BrowserRouter>
       <div className="App">
-        {logIn === false ? (
+        {logInStatus === false ? (
           <LoginPage />
         ) : (
           <div>
