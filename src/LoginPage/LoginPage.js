@@ -3,7 +3,7 @@ import './LoginPage.css';
 import notepad from '../images/notepad.png';
 import overview_logo from '../images/overview_logo.png';
 import { useDispatch } from 'react-redux';
-import { setLogInStatus } from '../Redux/todoistSlice';
+import { setLogInStatus, setAccessToken } from '../Redux/todoistSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const LoginPage = () => {
         body: `client_id=${clientId}&client_secret=${clientSecret}&code=${code.current}&redirect_uri=${redirectUri}`,
       })
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => dispatch(setAccessToken(data.access_token)))
         .catch((error) => {
           console.error('Error:', error);
         });
