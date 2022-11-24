@@ -10,6 +10,7 @@
   color: var(--fourth-color);
   transform: translateX(15rem);
   transition: 0.5s;
+  z-index: 100;
 }
 
 .side-menu .closeBtn {
