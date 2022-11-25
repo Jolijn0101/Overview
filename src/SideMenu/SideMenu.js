@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import './SideMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { sideMenuState, setSideMenu, setLogInStatus } from '../Redux/todoistSlice';
+import { sideMenuState, setSideMenu, setLogInStatus, allProjects, color_list } from '../Redux/todoistSlice';
 import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
   const sideMenu_state = useSelector(sideMenuState);
+  const projects = useSelector(allProjects);
   const dispatch = useDispatch();
+  const colorList = useSelector(color_list);
 
   useEffect(() => {
     if (window.screen.width >= 768) {
@@ -27,6 +29,19 @@ const SideMenu = () => {
   function logOut() {
     dispatch(setLogInStatus(false));
   }
+
+  const createProjectListing = projects.map((project) => {
+    let colorIndex = colorList.findIndex((word) => word[project.color]);
+    let colorCode = colorList[colorIndex][project.color];
+    return (
+      <li key={project.id}>
+        <Link className="link" to={`/Project/${project.name}`} onClick={closeSideMenu}>
+          <div className="project-color" style={{ backgroundColor: colorCode }}></div>
+          <h4>{project.name}</h4>
+        </Link>
+      </li>
+    );
+  });
 
   return (
     <div className="side-menu">
@@ -59,32 +74,7 @@ const SideMenu = () => {
         </li>
         <li>
           <h3>Projects</h3>
-          <ul className="project-list">
-            <li>
-              <Link className="link" to={'/Project/Persoonlijk'} onClick={closeSideMenu}>
-                <div className="project-color"></div>
-                <h4>Persoonlijk</h4>
-              </Link>
-            </li>
-            <li>
-              <Link className="link" to={'/Project/Klussen'} onClick={closeSideMenu}>
-                <div className="project-color"></div>
-                <h4>Klussen</h4>
-              </Link>
-            </li>
-            <li>
-              <Link className="link" to={'/Project/Werk'} onClick={closeSideMenu}>
-                <div className="project-color"></div>
-                <h4>Werk</h4>
-              </Link>
-            </li>
-            <li>
-              <Link className="link" to={'/Project/Hobby'} onClick={closeSideMenu}>
-                <div className="project-color"></div>
-                <h4>Hobby</h4>
-              </Link>
-            </li>
-          </ul>
+          <ul className="project-list">{projects ? createProjectListing : <h4>no projects to display</h4>}</ul>
         </li>
         <li id="log-out" onClick={logOut}>
           <svg className="log-out_icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

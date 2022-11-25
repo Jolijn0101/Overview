@@ -15,7 +15,6 @@ const LoginPage = () => {
 
   function logIn() {
     window.location = `https://todoist.com/oauth/authorize?client_id=${clientId}&scope=${scope}&state=secretstring`;
-    //dispatch(setLogInStatus(true));
   }
 
   useEffect(() => {
