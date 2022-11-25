@@ -5,18 +5,18 @@ import Project from '../Project/Project';
 import SideMenu from '../SideMenu/SideMenu';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { selectLoggedIn, accessTokenState, updateProjects, updateTasks } from '../Redux/todoistSlice';
+import { selectLoggedIn, selectAccessTokenState, updateProjects, updateTasks } from '../Redux/todoistSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { TodoistApi } from '@doist/todoist-api-typescript';
-import { loadingStatus, setLoadingStatus } from '../Redux/todoistSlice';
+import { selectloadingStatus, setLoadingStatus } from '../Redux/todoistSlice';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 function App() {
   const logInStatus = useSelector(selectLoggedIn);
-  const AccessToken = useSelector(accessTokenState);
+  const AccessToken = useSelector(selectAccessTokenState);
   let api = new TodoistApi(AccessToken);
   const dispatch = useDispatch();
-  const loadingState = useSelector(loadingStatus);
+  const loadingState = useSelector(selectloadingStatus);
 
   useEffect(() => {
     if (AccessToken !== false) {

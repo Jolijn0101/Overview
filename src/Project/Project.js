@@ -2,13 +2,13 @@ import React from 'react';
 import './Project.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSideMenu, tasks, allProjects } from '../Redux/todoistSlice';
+import { setSideMenu, selectTasks, selectProjects } from '../Redux/todoistSlice';
 
 const Project = () => {
   let { projectName } = useParams();
   const dispatch = useDispatch();
-  const taskArray = useSelector(tasks);
-  const projectArray = useSelector(allProjects);
+  const taskArray = useSelector(selectTasks);
+  const projectArray = useSelector(selectProjects);
 
   function openSideMenu() {
     dispatch(setSideMenu(true));

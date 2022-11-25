@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import './SideMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { sideMenuState, setSideMenu, setLogInStatus, allProjects, color_list } from '../Redux/todoistSlice';
+import { selectSideMenuState, setSideMenu, setLogInStatus, selectProjects, selectColor_list } from '../Redux/todoistSlice';
 import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
-  const sideMenu_state = useSelector(sideMenuState);
-  const projects = useSelector(allProjects);
+  const sideMenu_state = useSelector(selectSideMenuState);
+  const projects = useSelector(selectProjects);
   const dispatch = useDispatch();
-  const colorList = useSelector(color_list);
+  const colorList = useSelector(selectColor_list);
 
   useEffect(() => {
     if (window.screen.width >= 768) {

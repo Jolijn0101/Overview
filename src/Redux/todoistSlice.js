@@ -76,11 +76,11 @@ export const todoistSlice = createSlice({
 });
 
 export const selectLoggedIn = (state) => state.todoist.loggedIn;
-export const sideMenuState = (state) => state.todoist.sideMenuState;
-export const accessTokenState = (state) => state.todoist.access_token;
-export const loadingStatus = (state) => state.todoist.loading;
-export const allProjects = (state) => state.todoist.projects;
-export const color_list = (state) => state.todoist.color_list;
-export const tasks = (state) => state.todoist.tasks;
+export const selectSideMenuState = (state) => state.todoist.sideMenuState;
+export const selectAccessTokenState = (state) => state.todoist.access_token;
+export const selectloadingStatus = (state) => state.todoist.loading;
+export const selectProjects = (state) => state.todoist.projects;
+export const selectColor_list = (state) => state.todoist.color_list;
+export const selectTasks = (state) => state.todoist.tasks;
 export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus } = todoistSlice.actions;
 export default todoistSlice.reducer;
