@@ -1,17 +1,18 @@
 import React from 'react';
 import './Project.css';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setSideMenu } from '../Redux/todoistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSideMenu, tasks, allProjects } from '../Redux/todoistSlice';
 
 const Project = () => {
   let { projectName } = useParams();
   const dispatch = useDispatch();
+  const taskArray = useSelector(tasks);
+  const projectArray = useSelector(allProjects);
 
   function openSideMenu() {
     dispatch(setSideMenu(true));
   }
-
   return (
     <div className="project">
       <svg

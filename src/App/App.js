@@ -5,14 +5,14 @@ import Project from '../Project/Project';
 import SideMenu from '../SideMenu/SideMenu';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { loggedIn, accessTokenState, updateProjects, updateTasks } from '../Redux/todoistSlice';
+import { selectLoggedIn, accessTokenState, updateProjects, updateTasks } from '../Redux/todoistSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { TodoistApi } from '@doist/todoist-api-typescript';
 import { loadingStatus, setLoadingStatus } from '../Redux/todoistSlice';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 function App() {
-  const logInStatus = useSelector(loggedIn);
+  const logInStatus = useSelector(selectLoggedIn);
   const AccessToken = useSelector(accessTokenState);
   let api = new TodoistApi(AccessToken);
   const dispatch = useDispatch();
@@ -24,6 +24,8 @@ function App() {
       api
         .getProjects()
         .then((projects) => {
+          //removes inbox from the list
+          projects.shift();
           dispatch(updateProjects(projects));
           // get tasks after projects
           api

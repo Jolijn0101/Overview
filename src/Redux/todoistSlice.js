@@ -26,16 +26,27 @@ const initialState = {
     { grey: '#b8b8b8' },
     { taupe: '#ccac93' },
   ],
-  projects: false /*[
-    { name: 'Persoonlijk 🙂', color: 'grey', id: '2296556354' },
-    { name: 'huishouden', color: 'berry_red', id: '2299971835' },
-    { name: 'klussen', color: 'blue', id: '2299971852' },
+  projects: [
+    { id: '220474322', color: 'grey', name: 'Inbox' },
+    { id: '220474323', color: 'red', name: 'Persoonlijk' },
+    { id: '220474324', color: 'blue', name: 'Hobby' },
+  ],
+  tasks: [
+    //Inbox tasks
+    { id: '2995104339', content: 'Check mail', projectId: '220474322' },
+    { id: '2995104340', content: 'watch Netflix', projectId: '220474322' },
+    { id: '2995104341', content: 'book vacation', projectId: '220474322' },
 
-    { name: 'House', color: 'red', id: 1 },
-    { name: 'Work', color: 'blue', id: 2 },
-    { name: 'Tennisclub', color: 'green', id: 3 },
-  ]*/,
-  tasks: false,
+    //persoonlijk tasks
+    { id: '2995104342', content: 'vacum kitchen', projectId: '220474323' },
+    { id: '2995104343', content: 'Buy Milk', projectId: '220474323' },
+    { id: '2995104344', content: 'clean bathroom', projectId: '220474323' },
+
+    //Hobby
+    { id: '2995104345', content: 'sew hem', projectId: '220474324' },
+    { id: '2995104346', content: 'Buy skirt hook', projectId: '220474324' },
+    { id: '2995104347', content: 'draw pattern', projectId: '220474324' },
+  ],
   loading: false,
 };
 
@@ -64,11 +75,12 @@ export const todoistSlice = createSlice({
   },
 });
 
-export const loggedIn = (state) => state.todoist.loggedIn;
+export const selectLoggedIn = (state) => state.todoist.loggedIn;
 export const sideMenuState = (state) => state.todoist.sideMenuState;
 export const accessTokenState = (state) => state.todoist.access_token;
 export const loadingStatus = (state) => state.todoist.loading;
 export const allProjects = (state) => state.todoist.projects;
 export const color_list = (state) => state.todoist.color_list;
+export const tasks = (state) => state.todoist.tasks;
 export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus } = todoistSlice.actions;
 export default todoistSlice.reducer;
