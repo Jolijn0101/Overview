@@ -30,18 +30,22 @@ const SideMenu = () => {
     dispatch(setLogInStatus(false));
   }
 
-  const createProjectListing = projects.map((project) => {
-    let colorIndex = colorList.findIndex((word) => word[project.color]);
-    let colorCode = colorList[colorIndex][project.color];
-    return (
-      <li key={project.id}>
-        <Link className="link" to={`/Project/${project.name}`} onClick={closeSideMenu}>
-          <div className="project-color" style={{ backgroundColor: colorCode }}></div>
-          <h4>{project.name}</h4>
-        </Link>
-      </li>
-    );
-  });
+  const createProjectListing = projects ? (
+    projects.map((project) => {
+      let colorIndex = colorList.findIndex((word) => word[project.color]);
+      let colorCode = colorList[colorIndex][project.color];
+      return (
+        <li key={project.id}>
+          <Link className="link" to={`/Project/${project.name}`} onClick={closeSideMenu}>
+            <div className="project-color" style={{ backgroundColor: colorCode }}></div>
+            <h4>{project.name}</h4>
+          </Link>
+        </li>
+      );
+    })
+  ) : (
+    <h4>No projects to display</h4>
+  );
 
   return (
     <div className="side-menu">
@@ -74,7 +78,7 @@ const SideMenu = () => {
         </li>
         <li>
           <h3>Projects</h3>
-          <ul className="project-list">{projects ? createProjectListing : <h4>no projects to display</h4>}</ul>
+          <ul className="project-list">{createProjectListing}</ul>
         </li>
         <li id="log-out" onClick={logOut}>
           <svg className="log-out_icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

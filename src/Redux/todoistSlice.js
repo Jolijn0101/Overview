@@ -26,7 +26,7 @@ const initialState = {
     { grey: '#b8b8b8' },
     { taupe: '#ccac93' },
   ],
-  projects: /*false*/ [
+  projects: false /*[
     { name: 'Persoonlijk 🙂', color: 'grey', id: '2296556354' },
     { name: 'huishouden', color: 'berry_red', id: '2299971835' },
     { name: 'klussen', color: 'blue', id: '2299971852' },
@@ -34,7 +34,7 @@ const initialState = {
     { name: 'House', color: 'red', id: 1 },
     { name: 'Work', color: 'blue', id: 2 },
     { name: 'Tennisclub', color: 'green', id: 3 },
-  ],
+  ]*/,
   tasks: false,
   loading: false,
 };
