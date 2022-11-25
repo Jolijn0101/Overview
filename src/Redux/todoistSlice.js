@@ -6,6 +6,7 @@ const initialState = {
   access_token: false,
   projects: false,
   tasks: false,
+  loading: false,
 };
 
 export const todoistSlice = createSlice({
@@ -21,6 +22,9 @@ export const todoistSlice = createSlice({
     setAccessToken: (state, action) => {
       state.access_token = action.payload;
     },
+    setLoadingStatus: (state, action) => {
+      state.loading = action.payload;
+    },
     updateProjects: (state, action) => {
       state.projects = action.payload;
     },
@@ -33,5 +37,6 @@ export const todoistSlice = createSlice({
 export const loggedIn = (state) => state.todoist.loggedIn;
 export const sideMenuState = (state) => state.todoist.sideMenuState;
 export const accessTokenState = (state) => state.todoist.access_token;
-export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks } = todoistSlice.actions;
+export const loadingStatus = (state) => state.todoist.loading;
+export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus } = todoistSlice.actions;
 export default todoistSlice.reducer;

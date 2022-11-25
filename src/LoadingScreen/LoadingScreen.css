@@ -1,0 +1,54 @@
+#loadingScreen {
+  position: absolute;
+  z-index: 200;
+  width: calc(100vw);
+  height: 100vh;
+  background-color: var(--first-color);
+  margin-top: -0.5rem;
+}
+#loadingScreen h1 {
+  color: var(--fourth-color);
+  font-size: 45pt;
+  margin-bottom: 0px;
+}
+#loadingScreen h1:after {
+  display: none;
+}
+#loading_animation {
+  margin: calc(50vh - 80px) auto;
+  width: 225px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#loading_animation div {
+  background-color: var(--first-color);
+  height: 10px;
+  width: 28%;
+  margin-right: 10px;
+  border-radius: 5px;
+  -webkit-animation: appear 1.2s infinite alternate;
+  animation: appear 1.2s infinite alternate;
+}
+
+#loading_animation div:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+#loading_animation div:nth-child(4) {
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+@-webkit-keyframes appear {
+  to {
+    background-color: #ef865dff;
+  }
+}
+
+@keyframes appear {
+  to {
+    background-color: #ef865dff;
+  }
+}

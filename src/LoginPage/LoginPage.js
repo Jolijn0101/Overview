@@ -3,7 +3,7 @@ import './LoginPage.css';
 import notepad from '../images/notepad.png';
 import overview_logo from '../images/overview_logo.png';
 import { useDispatch } from 'react-redux';
-import { setLogInStatus, setAccessToken } from '../Redux/todoistSlice';
+import { setLogInStatus, setAccessToken, setLoadingStatus } from '../Redux/todoistSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (window.location.href.includes('code')) {
       dispatch(setLogInStatus(true));
+      dispatch(setLoadingStatus(true));
       // get code for the key
       let url = window.location.search;
       url = url.substring(1).split('&');

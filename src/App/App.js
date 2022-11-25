@@ -8,27 +8,34 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { loggedIn, accessTokenState, updateProjects, updateTasks } from '../Redux/todoistSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { TodoistApi } from '@doist/todoist-api-typescript';
+import { loadingStatus, setLoadingStatus } from '../Redux/todoistSlice';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 function App() {
   const logInStatus = useSelector(loggedIn);
   const AccessToken = useSelector(accessTokenState);
   let api = new TodoistApi(AccessToken);
   const dispatch = useDispatch();
+  const loadingState = useSelector(loadingStatus);
 
   useEffect(() => {
     if (AccessToken !== false) {
-      console.log('begin met laden');
       // get the projects
       api
         .getProjects()
-        .then((projects) => dispatch(updateProjects(projects)))
+        .then((projects) => {
+          dispatch(updateProjects(projects));
+          // get tasks after projects
+          api
+            .getTasks()
+            .then((tasks) => {
+              dispatch(updateTasks(tasks));
+              // set loading off after receiving tasks
+              dispatch(setLoadingStatus(false));
+            })
+            .catch((error) => console.log(error));
+        })
         .catch((error) => console.log(error));
-      // get tasks
-      api
-        .getTasks()
-        .then((tasks) => dispatch(updateTasks(tasks)))
-        .catch((error) => console.log(error));
-      console.log('eindig met laden');
     }
   }, [AccessToken]);
 
@@ -36,6 +43,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <div>
+          {loadingState ? <LoadingScreen /> : null}
           <SideMenu />
           <Routes>
             {logInStatus ? <Route path="/" element={<Project />} /> : <Route path="/" element={<LoginPage />} />}
