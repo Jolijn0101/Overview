@@ -27,13 +27,12 @@ const initialState = {
     { taupe: '#ccac93' },
   ],
   projects: [
-    /*{ id: '220474322', color: 'grey', name: 'Inbox' },
+    { id: '220474322', color: 'grey', name: 'Inbox' },
     { id: '220474323', color: 'red', name: 'Persoonlijk' },
     { id: '220474324', color: 'blue', name: 'Hobby' },
-    { id: '220474325', color: 'green', name: 'Project 2' },*/
+    { id: '220474325', color: 'green', name: 'Project 2' },
   ],
   tasks: [
-    /*
     //Inbox tasks
     { id: '2995104339', content: 'Check mail', projectId: '220474322' },
     { id: '2995104340', content: 'watch Netflix', projectId: '220474322' },
@@ -52,7 +51,7 @@ const initialState = {
     //Project 2
     { id: '2995104348', content: 'todo 1', projectId: '220474325' },
     { id: '2995104349', content: 'todo 2', projectId: '220474325' },
-    { id: '2995104350', content: 'todo 3', projectId: '220474325' },*/
+    { id: '2995104350', content: 'todo 3', projectId: '220474325' },
   ],
   loading: true,
 };
