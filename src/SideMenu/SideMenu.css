@@ -34,6 +34,11 @@
   max-height: 17rem;
 }
 
+/* removes Inbox title out project list */
+.side-menu .project-list li:first-of-type {
+  display: none;
+}
+
 .side-menu .project-list .link {
   display: flex;
   align-items: center;

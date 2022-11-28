@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: false,
   sideMenuState: false,
   access_token: false,
   color_list: [
@@ -27,11 +27,13 @@ const initialState = {
     { taupe: '#ccac93' },
   ],
   projects: [
-    { id: '220474322', color: 'grey', name: 'Inbox' },
+    /*{ id: '220474322', color: 'grey', name: 'Inbox' },
     { id: '220474323', color: 'red', name: 'Persoonlijk' },
     { id: '220474324', color: 'blue', name: 'Hobby' },
+    { id: '220474325', color: 'green', name: 'Project 2' },*/
   ],
   tasks: [
+    /*
     //Inbox tasks
     { id: '2995104339', content: 'Check mail', projectId: '220474322' },
     { id: '2995104340', content: 'watch Netflix', projectId: '220474322' },
@@ -46,8 +48,13 @@ const initialState = {
     { id: '2995104345', content: 'sew hem', projectId: '220474324' },
     { id: '2995104346', content: 'Buy skirt hook', projectId: '220474324' },
     { id: '2995104347', content: 'draw pattern', projectId: '220474324' },
+
+    //Project 2
+    { id: '2995104348', content: 'todo 1', projectId: '220474325' },
+    { id: '2995104349', content: 'todo 2', projectId: '220474325' },
+    { id: '2995104350', content: 'todo 3', projectId: '220474325' },*/
   ],
-  loading: false,
+  loading: true,
 };
 
 export const todoistSlice = createSlice({
@@ -68,9 +75,11 @@ export const todoistSlice = createSlice({
     },
     updateProjects: (state, action) => {
       state.projects = action.payload;
+      console.log(action.payload);
     },
     updateTasks: (state, action) => {
       state.tasks = action.payload;
+      console.log(action.payload);
     },
   },
 });

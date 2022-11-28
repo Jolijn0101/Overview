@@ -25,7 +25,6 @@ function App() {
         .getProjects()
         .then((projects) => {
           //removes inbox from the list
-          projects.shift();
           dispatch(updateProjects(projects));
           // get tasks after projects
           api

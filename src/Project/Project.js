@@ -6,9 +6,19 @@ import { setSideMenu, selectTasks, selectProjects } from '../Redux/todoistSlice'
 
 const Project = () => {
   let { projectName } = useParams();
+  //checks if there isn't a param for Inbox
+  if (projectName === undefined) {
+    projectName = 'Inbox';
+  }
   const dispatch = useDispatch();
-  const taskArray = useSelector(selectTasks);
-  const projectArray = useSelector(selectProjects);
+  const tasks = useSelector(selectTasks);
+  const projects = useSelector(selectProjects);
+
+  //finds the object of the project that needs to displayed
+  const projectObject = projects ? projects.find((object) => object.name === projectName) : false;
+
+  //gets the projectId from the projectobject and filters the tasks with the same project id
+  let projectTasks = tasks.filter((tasks) => tasks.projectId === projectObject.id);
 
   function openSideMenu() {
     dispatch(setSideMenu(true));
@@ -30,65 +40,31 @@ const Project = () => {
           clip-rule="evenodd"
         ></path>
       </svg>
-      <h1>{projectName ? projectName : 'Inbox'}</h1>
+      <h1>{projectName}</h1>
       <ul className="project__todo-list">
-        <li className="project__todo">
-          <div className="project__check-box">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <p>todo name</p>
-          <svg className="dots_ico" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill-rule="evenodd"
-              d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </li>
-        <li className="project__todo">
-          <div className="project__check-box">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <p>todo name</p>
-          <svg className="dots_ico" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill-rule="evenodd"
-              d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </li>
-        <li className="project__todo">
-          <div className="project__check-box">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <p>todo name</p>
-          <svg className="dots_ico" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill-rule="evenodd"
-              d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </li>
+        {projectTasks.map((task) => {
+          return (
+            <li className="project__todo" key={task.id}>
+              <div className="project__check-box">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <p>{task.content}</p>
+              <svg className="dots_ico" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </li>
+          );
+        })}
       </ul>
       <div className="project__add-todo">
         <svg
