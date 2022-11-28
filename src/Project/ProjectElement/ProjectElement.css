@@ -1,3 +1,53 @@
 .ProjectElement {
   margin-bottom: 4rem;
 }
+
+.add-todo_toggle_btn {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: var(--fifth-color);
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 1.9px;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+
+.add-todo__input_field {
+  /*display: flex;*/
+  display: none;
+  width: calc(100% - 2em - 10px);
+}
+
+.add-todo__input_field input {
+  flex: 3;
+  padding: 5px 15px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  border: solid 2px var(--third-color);
+  color: var(--third-color);
+  border-radius: 8px 0px 0px 8px;
+}
+
+.add-todo__input_field input:active,
+.add-todo__input_field input:focus {
+  border: solid 2px var(--third-color);
+  border-radius: 8px 0px 0px 8px;
+  outline: none;
+}
+
+.add-todo__input_field button {
+  flex: 1;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  border: none;
+  background-color: var(--second-color);
+  color: white;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.add-todo__input_field button:hover {
+  background-color: var(--third-color);
+  cursor: pointer;
+}

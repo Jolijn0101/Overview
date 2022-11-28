@@ -34,7 +34,7 @@ const Project = () => {
         <>
           <h1 style={{ marginBottom: '3rem' }}>{projectName}</h1>
           {projects.map((project) => {
-            return <ProjectElement projectProp={project.name} />;
+            return <ProjectElement projectProp={project.name} key={project.id} />;
           })}
         </>
       ) : (

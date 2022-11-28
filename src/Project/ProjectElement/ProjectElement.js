@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTasks, selectProjects } from '../../Redux/todoistSlice';
+import { selectTodos, selectProjects, createTodo } from '../../Redux/todoistSlice';
 import './ProjectElement.css';
 
 const ProjectElement = ({ projectProp }) => {
@@ -16,14 +16,46 @@ const ProjectElement = ({ projectProp }) => {
     projectName = projectProp;
   }
   const dispatch = useDispatch();
-  const tasks = useSelector(selectTasks);
+  const tasks = useSelector(selectTodos);
   const projects = useSelector(selectProjects);
+  const [toggle, setToggle] = useState(false);
+  const [newTodo, setNewTodo] = useState('');
+  const trackNewTodo = (e) => setNewTodo(e.target.value);
 
   //finds the object of the project that needs to displayed
   const projectObject = projects ? projects.find((object) => object.name === projectName) : false;
 
   //gets the projectId from the projectobject and filters the tasks with the same project id
   let projectTasks = tasks.filter((tasks) => tasks.projectId === projectObject.id);
+
+  function openAddTodoMenu() {
+    if (toggle === false) {
+      document.querySelector(`#project__add-todo_${projectName} h4`).style.display = 'none';
+      document.querySelector(`#add-todo_toggle_btn_${projectName}`).innerHTML = '-';
+      document.querySelector(`#add-todo_toggle_btn_${projectName}`).style.backgroundColor = 'var(--third-color)';
+      document.querySelector(`#add-todo__input_field_${projectName}`).style.display = 'flex';
+      setToggle(true);
+    }
+    if (toggle === true) {
+      document.querySelector(`#project__add-todo_${projectName} h4`).style.display = 'inline';
+      document.querySelector(`#add-todo_toggle_btn_${projectName}`).innerHTML = '+';
+      document.querySelector(`#add-todo_toggle_btn_${projectName}`).style.backgroundColor = 'var(--second-color)';
+      document.querySelector(`#add-todo__input_field_${projectName}`).style.display = 'none';
+      setToggle(false);
+    }
+  }
+
+  function addnewTodo() {
+    if (!newTodo) {
+      document.querySelector(`#add-todo__input_field_${projectName} input`).style.border = 'solid red 2px';
+    } else {
+      let id = 2995104350;
+      dispatch(createTodo({ id: id++, content: newTodo, projectId: projectObject.id }));
+      setNewTodo('');
+      document.querySelector(`#add-todo__input_field_${projectName} input`).style.border = 'solid 2px var(--third-color)';
+      openAddTodoMenu();
+    }
+  }
 
   return (
     <div className="ProjectElement">
@@ -53,18 +85,15 @@ const ProjectElement = ({ projectProp }) => {
           );
         })}
       </ul>
-      <div className="project__add-todo">
-        <svg
-          className="project__plus-icon"
-          stroke="currentColor"
-          fill="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H544v152c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V544H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h152V328c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v152h152c4.4 0 8 3.6 8 8v48z"></path>
-        </svg>
+      <div className={`project__add-todo`} id={`project__add-todo_${projectName}`}>
+        <div className={`add-todo_toggle_btn`} id={`add-todo_toggle_btn_${projectName}`} onClick={openAddTodoMenu}>
+          +
+        </div>
         <h4>add Todo</h4>
+        <div className="add-todo__input_field" id={`add-todo__input_field_${projectName}`}>
+          <input type="text" placeholder="type new task..." value={newTodo} onChange={trackNewTodo} />
+          <button onClick={addnewTodo}>send</button>
+        </div>
       </div>
       <div className="project__remove-project">
         <svg

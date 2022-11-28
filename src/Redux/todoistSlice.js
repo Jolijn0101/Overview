@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: true,
   sideMenuState: false,
   access_token: false,
   color_list: [
@@ -32,13 +32,13 @@ const initialState = {
     { id: '220474324', color: 'blue', name: 'Hobby' },
     { id: '220474325', color: 'green', name: 'Project 2' },
   ],
-  tasks: [
-    //Inbox tasks
+  todos: [
+    //Inbox
     { id: '2995104339', content: 'Check mail', projectId: '220474322' },
     { id: '2995104340', content: 'watch Netflix', projectId: '220474322' },
     { id: '2995104341', content: 'book vacation', projectId: '220474322' },
 
-    //persoonlijk tasks
+    //persoonlijk
     { id: '2995104342', content: 'vacum kitchen', projectId: '220474323' },
     { id: '2995104343', content: 'Buy Milk', projectId: '220474323' },
     { id: '2995104344', content: 'clean bathroom', projectId: '220474323' },
@@ -53,7 +53,7 @@ const initialState = {
     { id: '2995104349', content: 'todo 2', projectId: '220474325' },
     { id: '2995104350', content: 'todo 3', projectId: '220474325' },
   ],
-  loading: true,
+  loading: false,
 };
 
 export const todoistSlice = createSlice({
@@ -77,8 +77,11 @@ export const todoistSlice = createSlice({
       console.log(action.payload);
     },
     updateTasks: (state, action) => {
-      state.tasks = action.payload;
+      state.todos = action.payload;
       console.log(action.payload);
+    },
+    createTodo: (state, action) => {
+      state.todos.push(action.payload);
     },
   },
 });
@@ -89,6 +92,6 @@ export const selectAccessTokenState = (state) => state.todoist.access_token;
 export const selectloadingStatus = (state) => state.todoist.loading;
 export const selectProjects = (state) => state.todoist.projects;
 export const selectColor_list = (state) => state.todoist.color_list;
-export const selectTasks = (state) => state.todoist.tasks;
-export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus } = todoistSlice.actions;
+export const selectTodos = (state) => state.todoist.todos;
+export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus, createTodo } = todoistSlice.actions;
 export default todoistSlice.reducer;
