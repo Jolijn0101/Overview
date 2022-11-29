@@ -11,10 +11,12 @@ import { TodoistApi } from '@doist/todoist-api-typescript';
 import { selectloadingStatus, setLoadingStatus } from '../Redux/todoistSlice';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
+let api;
+
 function App() {
   const logInStatus = useSelector(selectLoggedIn);
   const AccessToken = useSelector(selectAccessTokenState);
-  let api = new TodoistApi(AccessToken);
+  api = new TodoistApi(AccessToken);
   const dispatch = useDispatch();
   const loadingState = useSelector(selectloadingStatus);
 
@@ -57,4 +59,5 @@ function App() {
   );
 }
 
+export { api };
 export default App;

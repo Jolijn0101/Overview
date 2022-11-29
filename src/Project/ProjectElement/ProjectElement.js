@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTodos, selectProjects, createTodo } from '../../Redux/todoistSlice';
+import { selectTodos, selectProjects, createTodo, setLoadingStatus } from '../../Redux/todoistSlice';
 import './ProjectElement.css';
+import { api } from '../../App/App';
 
 const ProjectElement = ({ projectProp }) => {
   let { projectName } = useParams();
@@ -30,30 +31,38 @@ const ProjectElement = ({ projectProp }) => {
 
   function openAddTodoMenu() {
     if (toggle === false) {
-      document.querySelector(`#project__add-todo_${projectName} h4`).style.display = 'none';
-      document.querySelector(`#add-todo_toggle_btn_${projectName}`).innerHTML = '-';
-      document.querySelector(`#add-todo_toggle_btn_${projectName}`).style.backgroundColor = 'var(--third-color)';
-      document.querySelector(`#add-todo__input_field_${projectName}`).style.display = 'flex';
+      document.querySelector(`#project__add-todo_${projectObject.id} h4`).style.display = 'none';
+      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).innerHTML = '-';
+      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).style.backgroundColor = 'var(--third-color)';
+      document.querySelector(`#add-todo__input_field_${projectObject.id}`).style.display = 'flex';
       setToggle(true);
     }
     if (toggle === true) {
-      document.querySelector(`#project__add-todo_${projectName} h4`).style.display = 'inline';
-      document.querySelector(`#add-todo_toggle_btn_${projectName}`).innerHTML = '+';
-      document.querySelector(`#add-todo_toggle_btn_${projectName}`).style.backgroundColor = 'var(--second-color)';
-      document.querySelector(`#add-todo__input_field_${projectName}`).style.display = 'none';
+      document.querySelector(`#project__add-todo_${projectObject.id} h4`).style.display = 'inline';
+      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).innerHTML = '+';
+      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).style.backgroundColor = 'var(--second-color)';
+      document.querySelector(`#add-todo__input_field_${projectObject.id}`).style.display = 'none';
       setToggle(false);
     }
   }
 
   function addnewTodo() {
     if (!newTodo) {
-      document.querySelector(`#add-todo__input_field_${projectName} input`).style.border = 'solid red 2px';
+      document.querySelector(`#add-todo__input_field_${projectObject.id} input`).style.border = 'solid red 2px';
     } else {
-      let id = 2995104350;
-      dispatch(createTodo({ id: id++, content: newTodo, projectId: projectObject.id }));
-      setNewTodo('');
-      document.querySelector(`#add-todo__input_field_${projectName} input`).style.border = 'solid 2px var(--third-color)';
-      openAddTodoMenu();
+      dispatch(setLoadingStatus(true));
+      api
+        .addTask({ content: newTodo, projectId: projectObject.id })
+        .then((task) =>
+          dispatch(
+            createTodo(task),
+            setNewTodo(''),
+            (document.querySelector(`#add-todo__input_field_${projectObject.id} input`).style.border = 'solid 2px var(--third-color)'),
+            openAddTodoMenu(),
+            dispatch(setLoadingStatus(false))
+          )
+        )
+        .catch((error) => console.log(error));
     }
   }
 
@@ -85,12 +94,12 @@ const ProjectElement = ({ projectProp }) => {
           );
         })}
       </ul>
-      <div className={`project__add-todo`} id={`project__add-todo_${projectName}`}>
-        <div className={`add-todo_toggle_btn`} id={`add-todo_toggle_btn_${projectName}`} onClick={openAddTodoMenu}>
+      <div className={`project__add-todo`} id={`project__add-todo_${projectObject.id}`}>
+        <div className={`add-todo_toggle_btn`} id={`add-todo_toggle_btn_${projectObject.id}`} onClick={openAddTodoMenu}>
           +
         </div>
         <h4>add Todo</h4>
-        <div className="add-todo__input_field" id={`add-todo__input_field_${projectName}`}>
+        <div className="add-todo__input_field" id={`add-todo__input_field_${projectObject.id}`}>
           <input type="text" placeholder="type new task..." value={newTodo} onChange={trackNewTodo} />
           <button onClick={addnewTodo}>send</button>
         </div>
