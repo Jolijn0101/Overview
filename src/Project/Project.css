@@ -38,26 +38,6 @@
   padding: 1rem 0rem;
 }
 
-.project__check-box {
-  width: 2em;
-  height: 2em;
-  border: 3px solid var(--third-color);
-  border-radius: 50%;
-  padding: 0.1em;
-  margin-right: 1rem;
-}
-
-.project__check-box svg {
-  width: 1.5em;
-  height: 1.5em;
-  color: var(--fourth-color);
-}
-
-.project__check-box:hover {
-  background-color: var(--fifth-color);
-  border-color: var(--fifth-color);
-}
-
 .project p,
 .project h4 {
   margin-top: 0.4rem;

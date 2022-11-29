@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTodos, selectProjects, createTodo, setLoadingStatus, removedProject } from '../../Redux/todoistSlice';
+import { selectTodos, selectProjects, createTodo, setLoadingStatus, removedProject, removeTodo } from '../../Redux/todoistSlice';
 import './ProjectElement.css';
 import { api } from '../../App/App';
 
@@ -66,6 +66,13 @@ const ProjectElement = ({ projectProp }) => {
     }
   }
 
+  function checkTodo(id) {
+    document.querySelector(`#check-box${id}`).classList.toggle('project__check-box_checked');
+    setTimeout(() => {
+      dispatch(removeTodo(id));
+    }, '1000');
+  }
+
   function removeProject() {
     function removeProjectTrue() {
       dispatch(removedProject(projectObject.id));
@@ -89,11 +96,11 @@ const ProjectElement = ({ projectProp }) => {
         <>
           {projectProp ? <h2>{projectName}</h2> : <h1>{projectName}</h1>}
           <ul className="project__todo-list">
-            {projectTasks.length > 1 ? (
+            {projectTasks.length >= 1 ? (
               projectTasks.map((task) => {
                 return (
                   <li className="project__todo" key={task.id}>
-                    <div className="project__check-box">
+                    <div className="project__check-box" id={`check-box${task.id}`} onClick={() => checkTodo(task.id)}>
                       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
                           fill-rule="evenodd"
