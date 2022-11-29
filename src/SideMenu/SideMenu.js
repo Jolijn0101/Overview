@@ -38,7 +38,7 @@ const SideMenu = () => {
         <li key={project.id}>
           <Link className="link" to={`/Project/${project.name}`} onClick={closeSideMenu}>
             <div className="project-color" style={{ backgroundColor: colorCode }}></div>
-            <h4>{project.name}</h4>
+            <p>{project.name}</p>
           </Link>
         </li>
       );
@@ -79,6 +79,10 @@ const SideMenu = () => {
         <li>
           <h3>Projects</h3>
           <ul className="project-list">{createProjectListing}</ul>
+          <ul id="add_project_container">
+            <div id="add_project_btn">+</div>
+            <h4>add project</h4>
+          </ul>
         </li>
         <li id="log-out" onClick={logOut}>
           <svg className="log-out_icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

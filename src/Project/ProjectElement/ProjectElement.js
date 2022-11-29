@@ -67,10 +67,25 @@ const ProjectElement = ({ projectProp }) => {
   }
 
   function checkTodo(id) {
+    function checkTodoFalse(error) {
+      console.log(error);
+      dispatch(setLoadingStatus(false));
+      alert('server error, try again');
+      document.querySelector(`#check-box${id}`).classList.toggle('project__check-box_checked');
+    }
+    function checkTodoTrue(isSuccess) {
+      console.log(isSuccess);
+      dispatch(removeTodo(id));
+      dispatch(setLoadingStatus(false));
+    }
     document.querySelector(`#check-box${id}`).classList.toggle('project__check-box_checked');
     setTimeout(() => {
-      dispatch(removeTodo(id));
-    }, '1000');
+      dispatch(setLoadingStatus(true));
+      api
+        .closeTask(id)
+        .then((isSuccess) => checkTodoTrue(isSuccess))
+        .catch((error) => checkTodoFalse(error));
+    }, 1500);
   }
 
   function removeProject() {

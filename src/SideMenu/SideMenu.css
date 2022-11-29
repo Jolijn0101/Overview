@@ -24,7 +24,7 @@
   line-height: 3.5rem;
 }
 
-.side-menu h4 {
+.side-menu p {
   line-height: 3rem;
   font-size: 1rem;
 }
@@ -51,6 +51,22 @@
   border-radius: 50%;
   border: solid 2.5px var(--fourth-color);
   margin-right: 0.8rem;
+}
+
+#add_project_container {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+#add_project_btn {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--fifth-color);
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  text-align: center;
+  font-size: 1.4rem;
 }
 
 .side-menu .log-out_icon {
