@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: false,
   sideMenuState: false,
   access_token: false,
   color_list: [
@@ -54,7 +54,7 @@ const initialState = {
     { id: '2995104349', content: 'todo 2', projectId: '220474325' },
     { id: '2995104350', content: 'todo 3', projectId: '220474325' },
   ],
-  loading: false,
+  loading: true,
 };
 
 export const todoistSlice = createSlice({

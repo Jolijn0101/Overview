@@ -67,7 +67,20 @@ const ProjectElement = ({ projectProp }) => {
   }
 
   function removeProject() {
-    dispatch(removedProject(projectObject.id));
+    function removeProjectTrue() {
+      dispatch(removedProject(projectObject.id));
+      dispatch(setLoadingStatus(false));
+    }
+    function removeProjectFalse(error) {
+      console.log(error);
+      dispatch(setLoadingStatus(false));
+      alert('Server Error, try again');
+    }
+    dispatch(setLoadingStatus(true));
+    api
+      .deleteProject(projectObject.id)
+      .then((isSuccess) => (isSuccess === true ? removeProjectTrue() : null))
+      .catch((error) => removeProjectFalse(error));
   }
 
   return (

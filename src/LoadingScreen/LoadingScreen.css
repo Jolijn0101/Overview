@@ -1,7 +1,7 @@
 #loadingScreen {
   position: fixed;
   z-index: 200;
-  width: calc(100vw);
+  width: 100vw;
   height: 100vh;
   background-color: var(--first-color);
   margin-top: -0.5rem;
