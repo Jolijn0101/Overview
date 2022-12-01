@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: false,
   sideMenuState: false,
   projectMenuState: false,
   access_token: false,
@@ -55,7 +55,7 @@ const initialState = {
     { id: '2995104349', content: 'todo 2', projectId: '220474325' },
     { id: '2995104350', content: 'todo 3', projectId: '220474325' },
   ],
-  loading: false,
+  loading: true,
 };
 
 export const todoistSlice = createSlice({

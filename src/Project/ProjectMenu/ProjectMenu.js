@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ProjectMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectColor_list, selectProjectMenuState, setProjectMenuState } from '../../Redux/todoistSlice';
+import { selectColor_list, selectProjectMenuState, setProjectMenuState, setLoadingStatus } from '../../Redux/todoistSlice';
 import { createProject } from '../../Redux/todoistSlice';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../App/App';
 
 const ProjectMenu = () => {
   const dispatch = useDispatch();
@@ -49,24 +50,37 @@ const ProjectMenu = () => {
     if (projectColor === '') {
       document.querySelector('#project_color_list').style.border = 'solid 2px red';
     } else {
-      idCounter.current = idCounter.current + 1;
-      dispatch(createProject({ id: idCounter.current.toString(), color: projectColor[0], name: projectName }));
+      function addNewProjectTrue(project) {
+        dispatch(createProject(project));
+        dispatch(setLoadingStatus(false));
 
-      //close menu
+        //go to new project page
+        navigate(`/Project/${projectName}`);
+
+        //clear eventually 'nothing typed' warnings
+        document.querySelector('#project_menu input').style.border = 'solid 2px #4a62e4ff';
+        document.querySelector('#project_color_list').style.border = 'solid 2px #4a62e4ff';
+
+        //reset styling colorBtn and inputfield, reset state values too
+        setProjectName('');
+        document.querySelector(projectColor[1]).style.backgroundColor = 'var(--fifth-color)';
+        document.querySelector(projectColor[1]).innerHTML = '+';
+        setProjectColor('');
+      }
+      function addNewProjectFalse(error) {
+        console.log(error);
+        dispatch(setLoadingStatus(false));
+        alert('Server Error, try again');
+      }
+
+      //close menu before loading
       closeProjectMenu();
+      dispatch(setLoadingStatus(true));
 
-      //go to new project page
-      navigate(`/Project/${projectName}`);
-
-      //clear eventually 'nothing typed' warnings
-      document.querySelector('#project_menu input').style.border = 'solid 2px #4a62e4ff';
-      document.querySelector('#project_color_list').style.border = 'solid 2px #4a62e4ff';
-
-      //reset styling colorBtn and inputfield, reset state values too
-      setProjectName('');
-      document.querySelector(projectColor[1]).style.backgroundColor = 'var(--fifth-color)';
-      document.querySelector(projectColor[1]).innerHTML = '+';
-      setProjectColor('');
+      api
+        .addProject({ name: projectName, color: projectColor[0] })
+        .then((project) => addNewProjectTrue(project))
+        .catch((error) => addNewProjectFalse(error));
     }
   }
 
