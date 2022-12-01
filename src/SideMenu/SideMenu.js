@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './SideMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSideMenuState, setSideMenu, setLogInStatus, selectProjects, selectColor_list } from '../Redux/todoistSlice';
+import { selectSideMenuState, setSideMenu, setLogInStatus, selectProjects, selectColor_list, setProjectMenuState } from '../Redux/todoistSlice';
 import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
@@ -11,6 +11,7 @@ const SideMenu = () => {
   const colorList = useSelector(selectColor_list);
 
   useEffect(() => {
+    //switch between sideMenu hide for mobile and visible for larger screens
     if (window.screen.width >= 768) {
       document.querySelector('.side-menu').style.transform = 'translateX(0)';
     } else {
@@ -28,6 +29,11 @@ const SideMenu = () => {
 
   function logOut() {
     dispatch(setLogInStatus(false));
+  }
+
+  function openProjectMenu() {
+    dispatch(setProjectMenuState(true));
+    closeSideMenu();
   }
 
   const createProjectListing = projects ? (
@@ -79,7 +85,7 @@ const SideMenu = () => {
         <li>
           <h3>Projects</h3>
           <ul className="project-list">{createProjectListing}</ul>
-          <ul id="add_project_container">
+          <ul id="add_project_container" onClick={openProjectMenu}>
             <div id="add_project_btn">+</div>
             <h4>add project</h4>
           </ul>

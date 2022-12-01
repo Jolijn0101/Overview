@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   loggedIn: true,
   sideMenuState: false,
+  projectMenuState: false,
   access_token: false,
   color_list: [
     { berry_red: '#b8256f' },
@@ -64,6 +65,9 @@ export const todoistSlice = createSlice({
     setSideMenu: (state, action) => {
       state.sideMenuState = action.payload;
     },
+    setProjectMenuState: (state, action) => {
+      state.projectMenuState = action.payload;
+    },
     setLogInStatus: (state, action) => {
       state.loggedIn = action.payload;
     },
@@ -87,6 +91,9 @@ export const todoistSlice = createSlice({
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
+    createProject: (state, action) => {
+      state.projects.push(action.payload);
+    },
     removedProject: (state, action) => {
       state.projects = state.projects.filter((project) => project.id !== action.payload);
       state.todos = state.todos.filter((todo) => todo.projectId !== action.payload);
@@ -101,6 +108,18 @@ export const selectloadingStatus = (state) => state.todoist.loading;
 export const selectProjects = (state) => state.todoist.projects;
 export const selectColor_list = (state) => state.todoist.color_list;
 export const selectTodos = (state) => state.todoist.todos;
-export const { setSideMenu, setLogInStatus, setAccessToken, updateProjects, updateTasks, setLoadingStatus, createTodo, removedProject, removeTodo } =
-  todoistSlice.actions;
+export const selectProjectMenuState = (state) => state.todoist.projectMenuState;
+export const {
+  setSideMenu,
+  setLogInStatus,
+  setAccessToken,
+  updateProjects,
+  updateTasks,
+  setLoadingStatus,
+  createTodo,
+  removedProject,
+  removeTodo,
+  createProject,
+  setProjectMenuState,
+} = todoistSlice.actions;
 export default todoistSlice.reducer;

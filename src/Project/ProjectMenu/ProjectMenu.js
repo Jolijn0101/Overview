@@ -1,15 +1,81 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ProjectMenu.css';
-import { useSelector } from 'react-redux';
-import { selectColor_list } from '../../Redux/todoistSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectColor_list, selectProjectMenuState, setProjectMenuState } from '../../Redux/todoistSlice';
+import { createProject } from '../../Redux/todoistSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectMenu = () => {
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+  const projectMenuState = useSelector(selectProjectMenuState);
   const colorList = useSelector(selectColor_list);
+  const [projectName, setProjectName] = useState('');
+  const [projectColor, setProjectColor] = useState('');
+  const idCounter = useRef(220474326);
+  const trackNewProject = (e) => setProjectName(e.target.value);
+
+  //closes and opens the menu if projectState changes
+  useEffect(() => {
+    if (projectMenuState === false) {
+      document.querySelector('#project_menu_container').style.display = 'none';
+    }
+    if (projectMenuState === true) {
+      //wait until side menu is closed and open project menu
+      setTimeout(() => {
+        document.querySelector('#project_menu_container').style.display = 'flex';
+      }, 200);
+    }
+  }, [projectMenuState]);
+
+  function closeProjectMenu() {
+    dispatch(setProjectMenuState(false));
+  }
+
+  function setColor(color, buttonId) {
+    if (projectColor) {
+      document.querySelector(projectColor[1]).style.backgroundColor = 'var(--fifth-color)';
+      document.querySelector(projectColor[1]).innerHTML = '+';
+    }
+    setProjectColor([color, buttonId]);
+    document.querySelector(buttonId).style.backgroundColor = 'gray';
+    document.querySelector(buttonId).innerHTML = '-';
+  }
+
+  function addNewProject() {
+    if (projectName === '') {
+      document.querySelector('#project_menu input').style.border = 'solid 2px red';
+    }
+    if (projectColor === '') {
+      document.querySelector('#project_color_list').style.border = 'solid 2px red';
+    } else {
+      idCounter.current = idCounter.current + 1;
+      dispatch(createProject({ id: idCounter.current.toString(), color: projectColor[0], name: projectName }));
+
+      //close menu
+      closeProjectMenu();
+
+      //go to new project page
+      navigate(`/Project/${projectName}`);
+
+      //clear eventually 'nothing typed' warnings
+      document.querySelector('#project_menu input').style.border = 'solid 2px #4a62e4ff';
+      document.querySelector('#project_color_list').style.border = 'solid 2px #4a62e4ff';
+
+      //reset styling colorBtn and inputfield, reset state values too
+      setProjectName('');
+      document.querySelector(projectColor[1]).style.backgroundColor = 'var(--fifth-color)';
+      document.querySelector(projectColor[1]).innerHTML = '+';
+      setProjectColor('');
+    }
+  }
+
   return (
     <div id="project_menu_container">
       <div id="project_menu">
         <svg
           className="closeBtn"
+          onClick={closeProjectMenu}
           stroke="currentColor"
           fill="none"
           stroke-width="0"
@@ -25,28 +91,27 @@ const ProjectMenu = () => {
         </svg>
         <h2>Create Project</h2>
         <h3>Project name</h3>
-        <input type="text" id="project name" />
+        <input type="text" onChange={trackNewProject} value={projectName} />
         <h3>Project color</h3>
         <ul id="project_color_list">
           {colorList.map((color) => {
             let colorKey = Object.keys(color).toString();
-
-            if (colorKey.includes('_')) {
-              colorKey = colorKey.replace('_', ' ');
-            }
-
+            let colorTitle;
+            colorKey.includes('_') ? (colorTitle = colorKey.replace('_', ' ')) : (colorTitle = colorKey);
             return (
-              <li>
+              <li key={`${colorKey}_key`}>
                 <div id="color" style={{ backgroundColor: Object.values(color) }}></div>
-                <h4>{colorKey}</h4>
-                <div className="plusBtn">
-                  <p>+</p>
+                <h4>{colorTitle}</h4>
+                <div className="plusBtn" id={`plusBtn_${colorKey}`} onClick={() => setColor(colorKey, `#plusBtn_${colorKey}`)}>
+                  +
                 </div>
               </li>
             );
           })}
         </ul>
-        <button className="button">Add</button>
+        <button className="button" onClick={addNewProject}>
+          Add
+        </button>
       </div>
     </div>
   );

@@ -19,6 +19,7 @@
 
 #project_menu svg {
   transform: translate(240px, -10px);
+  cursor: pointer;
 }
 
 #project_menu h2 {
@@ -68,7 +69,7 @@
   border-radius: 50%;
   border: 2px solid var(--fourth-color);
   margin-right: 1rem;
-  flex: 1.2;
+  flex: 1;
 }
 
 #project_menu h4 {
@@ -77,17 +78,15 @@
 }
 
 #project_menu .plusBtn {
-  flex: 0.75;
-  padding: 0.2rem 0rem 0.2rem 0.65rem;
-  margin-left: 1rem;
+  flex: 0.9;
+  height: 2rem;
+  width: 2rem;
   background-color: var(--fifth-color);
   border-radius: 10px;
-}
-
-#project_menu .plusBtn p {
-  font-size: 1.3rem;
-  color: var(--fourth-color);
-  margin: 0rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #project_menu button {
