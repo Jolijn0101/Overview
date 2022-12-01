@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSideMenu, selectProjects } from '../Redux/todoistSlice';
 import ProjectElement from './ProjectElement/ProjectElement';
+import ProjectMenu from './ProjectMenu/ProjectMenu';
 
 const Project = () => {
   let { projectName } = useParams();
@@ -15,6 +16,7 @@ const Project = () => {
   }
   return (
     <div className="project">
+      <ProjectMenu />
       <svg
         onClick={openSideMenu}
         className="mobile_menu_btn"
