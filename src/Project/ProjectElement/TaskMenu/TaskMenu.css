@@ -32,9 +32,34 @@
 #task_menu section {
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
-#task_menu h4 {
+#task_menu #deadline_task_container {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#task_menu_container h4 {
   color: white;
+  margin-bottom: 0.5rem;
+}
+
+#remove_task_container h4 {
   margin-left: 1rem;
+}
+
+/* deadline picker */
+#deadline {
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }

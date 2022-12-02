@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TaskMenu.css';
-import { selectTaskMenuState, setTaskMenuState, removeTodo, setLoadingStatus } from '../../../Redux/todoistSlice';
+import { selectTaskMenuState, setTaskMenuState, removeTodo, setLoadingStatus, saveNewDeadline, selectTodos } from '../../../Redux/todoistSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { api } from '../../../App/App';
 
 const TaskMenu = () => {
   const taskMenuState = useSelector(selectTaskMenuState);
+  const todos = useSelector(selectTodos);
   const dispatch = useDispatch();
+  const [newDeadline, setNewDeadline] = useState('');
+  const trackNewDeadline = (e) => setNewDeadline(e.target.value);
 
   useEffect(() => {
     if (taskMenuState.state === true) {
+      let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
+      todoObject.due.string === false ? setNewDeadline('') : setNewDeadline(todoObject.due.string);
       document.querySelector('#task_menu_container').style.display = 'flex';
     }
     if (taskMenuState.state === false) {
@@ -18,6 +23,9 @@ const TaskMenu = () => {
   }, [taskMenuState]);
 
   function closeTaskMenu() {
+    //save new data before closing
+    dispatch(saveNewDeadline({ deadline: newDeadline, taskId: taskMenuState.id }));
+    //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
   }
 
@@ -33,7 +41,7 @@ const TaskMenu = () => {
       console.log(error);
       alert('Server Error, try again');
     }
-    closeTaskMenu();
+    dispatch(setTaskMenuState({ state: false, id: false }));
     dispatch(setLoadingStatus(true));
     api
       .deleteTask(taskMenuState.id)
@@ -61,6 +69,10 @@ const TaskMenu = () => {
           ></path>
         </svg>
         <h2>Task Menu</h2>
+        <section id="deadline_task_container">
+          <h4>add deadline</h4>
+          <input type="date" id="deadline" name="deadline" value={newDeadline} onChange={trackNewDeadline}></input>
+        </section>
         <section id="remove_task_container" onClick={removeTask}>
           <svg
             className="task__trash-icon"

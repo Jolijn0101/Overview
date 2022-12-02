@@ -130,7 +130,7 @@ const ProjectElement = ({ projectProp }) => {
             {projectTasks.length >= 1 ? (
               projectTasks.map((task) => {
                 return (
-                  <li className="project__todo" key={task.id} onClick={() => openTaskMenu(task.id)}>
+                  <li className="project__todo" key={task.id}>
                     <div className="project__check-box" id={`check-box${task.id}`} onClick={() => checkTodo(task.id)}>
                       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -143,7 +143,7 @@ const ProjectElement = ({ projectProp }) => {
                     <p>{task.content}</p>
                     <svg
                       className="dots_ico"
-                      onClick={openTaskMenu}
+                      onClick={() => openTaskMenu(task.id)}
                       stroke="currentColor"
                       fill="currentColor"
                       stroke-width="0"
