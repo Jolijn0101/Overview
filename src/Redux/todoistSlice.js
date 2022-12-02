@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: false,
   sideMenuState: false,
   projectMenuState: false,
   taskMenuState: { state: false, id: false },
@@ -56,7 +56,7 @@ const initialState = {
     { id: '2995104349', content: 'todo 2', due: { string: false }, projectId: '220474325' },
     { id: '2995104350', content: 'todo 3', due: { string: false }, projectId: '220474325' },
   ],
-  loading: false,
+  loading: true,
 };
 
 export const todoistSlice = createSlice({
@@ -103,8 +103,8 @@ export const todoistSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.projectId !== action.payload);
     },
     saveNewDeadline: (state, action) => {
-      let taskObject = state.todos.find((todo) => todo.id === action.payload.taskId);
-      taskObject.due.string = action.payload.deadline;
+      let taskObjectIndex = state.todos.findIndex((todo) => todo.id === action.payload.taskId);
+      state.todos[taskObjectIndex] = action.payload;
     },
   },
 });

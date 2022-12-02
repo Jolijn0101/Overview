@@ -14,7 +14,8 @@ const TaskMenu = () => {
   useEffect(() => {
     if (taskMenuState.state === true) {
       let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
-      todoObject.due.string === false ? setNewDeadline('') : setNewDeadline(todoObject.due.string);
+      console.log(todoObject);
+      todoObject.due === null ? setNewDeadline('') : setNewDeadline(todoObject.due.date);
       document.querySelector('#task_menu_container').style.display = 'flex';
     }
     if (taskMenuState.state === false) {
@@ -23,10 +24,27 @@ const TaskMenu = () => {
   }, [taskMenuState]);
 
   function closeTaskMenu() {
-    //save new data before closing
-    dispatch(saveNewDeadline({ deadline: newDeadline, taskId: taskMenuState.id }));
     //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
+
+    //save new data
+    if (newDeadline !== '') {
+      dispatch(setLoadingStatus(true));
+      function saveDataTrue(isSuccess) {
+        console.log(isSuccess);
+        dispatch(saveNewDeadline(isSuccess));
+        dispatch(setLoadingStatus(false));
+      }
+      function saveDataFalse(error) {
+        console.log(error);
+        dispatch(setLoadingStatus(false));
+        alert('Server Error, try again');
+      }
+      api
+        .updateTask(taskMenuState.id, { due_date: newDeadline })
+        .then((isSuccess) => saveDataTrue(isSuccess))
+        .catch((error) => saveDataFalse(error));
+    }
   }
 
   function removeTask() {
