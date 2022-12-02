@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProjectMenu.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectColor_list, selectProjectMenuState, setProjectMenuState, setLoadingStatus } from '../../Redux/todoistSlice';
@@ -13,7 +13,6 @@ const ProjectMenu = () => {
   const colorList = useSelector(selectColor_list);
   const [projectName, setProjectName] = useState('');
   const [projectColor, setProjectColor] = useState('');
-  const idCounter = useRef(220474326);
   const trackNewProject = (e) => setProjectName(e.target.value);
 
   //closes and opens the menu if projectState changes

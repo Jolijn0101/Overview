@@ -1,0 +1,40 @@
+#task_menu_container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  transform: translate(-2rem, -3.8rem);
+}
+
+#task_menu {
+  background-color: var(--first-color);
+  width: 320px;
+  height: 50vh;
+  border-radius: 20px 0px 20px 0px;
+  padding: 2rem;
+  color: white;
+  overflow: hidden;
+}
+
+#task_menu .closeBtn {
+  transform: translate(240px, -10px);
+  cursor: pointer;
+}
+
+#task_menu h2 {
+  font-size: 1.8rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#task_menu section {
+  display: flex;
+  align-items: center;
+}
+
+#task_menu h4 {
+  color: white;
+  margin-left: 1rem;
+}

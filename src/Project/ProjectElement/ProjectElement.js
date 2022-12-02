@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTodos, selectProjects, createTodo, setLoadingStatus, removedProject, removeTodo } from '../../Redux/todoistSlice';
+import {
+  selectTodos,
+  selectProjects,
+  createTodo,
+  setLoadingStatus,
+  removedProject,
+  removeTodo,
+  setTaskMenuState,
+  selectTaskMenuState,
+} from '../../Redux/todoistSlice';
 import './ProjectElement.css';
 import { api } from '../../App/App';
+import TaskMenu from './TaskMenu/TaskMenu';
 
 const ProjectElement = ({ projectProp }) => {
   let { projectName } = useParams();
@@ -21,6 +31,7 @@ const ProjectElement = ({ projectProp }) => {
   const projects = useSelector(selectProjects);
   const [toggle, setToggle] = useState(false);
   const [newTodo, setNewTodo] = useState('');
+
   const trackNewTodo = (e) => setNewTodo(e.target.value);
 
   //finds the object of the project that needs to displayed
@@ -88,6 +99,10 @@ const ProjectElement = ({ projectProp }) => {
     }, 1500);
   }
 
+  function openTaskMenu(id) {
+    dispatch(setTaskMenuState({ state: true, id: id }));
+  }
+
   function removeProject() {
     function removeProjectTrue() {
       dispatch(removedProject(projectObject.id));
@@ -109,12 +124,13 @@ const ProjectElement = ({ projectProp }) => {
     <div className="ProjectElement">
       {projectObject ? (
         <>
+          <TaskMenu />
           {projectProp ? <h2>{projectName}</h2> : <h1>{projectName}</h1>}
           <ul className="project__todo-list">
             {projectTasks.length >= 1 ? (
               projectTasks.map((task) => {
                 return (
-                  <li className="project__todo" key={task.id}>
+                  <li className="project__todo" key={task.id} onClick={() => openTaskMenu(task.id)}>
                     <div className="project__check-box" id={`check-box${task.id}`} onClick={() => checkTodo(task.id)}>
                       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -125,7 +141,15 @@ const ProjectElement = ({ projectProp }) => {
                       </svg>
                     </div>
                     <p>{task.content}</p>
-                    <svg className="dots_ico" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      className="dots_ico"
+                      onClick={openTaskMenu}
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
                         fill-rule="evenodd"
                         d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
