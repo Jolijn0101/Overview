@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import './TaskMenu.css';
-import { selectTaskMenuState, setTaskMenuState, removeTodo } from '../../../Redux/todoistSlice';
+import { selectTaskMenuState, setTaskMenuState, removeTodo, setLoadingStatus } from '../../../Redux/todoistSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { api } from '../../../App/App';
 
 const TaskMenu = () => {
   const taskMenuState = useSelector(selectTaskMenuState);
@@ -21,8 +22,23 @@ const TaskMenu = () => {
   }
 
   function removeTask() {
-    dispatch(removeTodo(taskMenuState.id));
+    function removeTaskTrue(isSuccess) {
+      console.log(isSuccess);
+      dispatch(removeTodo(taskMenuState.id));
+      dispatch(setLoadingStatus(false));
+    }
+
+    function removeTaskFalse(error) {
+      dispatch(setLoadingStatus(false));
+      console.log(error);
+      alert('Server Error, try again');
+    }
     closeTaskMenu();
+    dispatch(setLoadingStatus(true));
+    api
+      .deleteTask(taskMenuState.id)
+      .then((isSuccess) => removeTaskTrue(isSuccess))
+      .catch((error) => removeTaskFalse(error));
   }
 
   return (
