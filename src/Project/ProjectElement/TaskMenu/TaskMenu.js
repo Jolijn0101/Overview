@@ -49,35 +49,53 @@ const TaskMenu = () => {
   function closeTaskMenu() {
     //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
+    dispatch(setLoadingStatus(true));
 
-    /*if (newDeadline !== todoObject.due.date) {
-      //save new data
-      if (newDeadline !== '') {
-        dispatch(setLoadingStatus(true));
-        function saveDataTrue(isSuccess) {
-          console.log(isSuccess);
-          dispatch(saveNewDeadline(isSuccess));
-          dispatch(setLoadingStatus(false));
+    function saveNewData() {
+      //save deadline
+      if (newDeadline !== todoObject.due.date) {
+        if (newDeadline !== '') {
+          dispatch(setLoadingStatus(true));
+          function saveDataTrue(isSuccess) {
+            console.log(isSuccess);
+            dispatch(saveNewDeadline(isSuccess));
+          }
+          function saveDataFalse(error) {
+            console.log(error);
+            dispatch(setLoadingStatus(false));
+            alert('Server Error, add deadline again');
+          }
+          api
+            .updateTask(taskMenuState.id, { due_date: newDeadline })
+            .then((isSuccess) => saveDataTrue(isSuccess))
+            .catch((error) => saveDataFalse(error));
         }
-        function saveDataFalse(error) {
-          console.log(error);
-          dispatch(setLoadingStatus(false));
-          alert('Server Error, try again');
-        }
-        api
-          .updateTask(taskMenuState.id, { due_date: newDeadline })
-          .then((isSuccess) => saveDataTrue(isSuccess))
-          .catch((error) => saveDataFalse(error));
       }
-    }*/
 
-    if (priorityArr[0] !== todoObject.priority) {
+      //save priority
       if (priorityArr[0] !== todoObject.priority) {
-        console.log(priorityArr);
-        dispatch(setNewPriority({ priority: priorityArr[0], taskId: todoObject.id }));
-        setpriorityArr([1, 'white']);
+        if (priorityArr[0] !== todoObject.priority) {
+          dispatch(setLoadingStatus(true));
+          function saveDataTrue(isSuccess) {
+            console.log(isSuccess);
+            dispatch(setNewPriority(isSuccess));
+            setpriorityArr([1, 'white']);
+          }
+          function saveDataFalse(error) {
+            console.log(error);
+            dispatch(setLoadingStatus(false));
+            alert('Server Error, add priority again');
+          }
+          api
+            .updateTask(taskMenuState.id, { priority: priorityArr[0] })
+            .then((isSuccess) => saveDataTrue(isSuccess))
+            .catch((error) => saveDataFalse(error));
+        }
       }
     }
+
+    saveNewData();
+    dispatch(setLoadingStatus(false));
   }
 
   function removeTask() {
