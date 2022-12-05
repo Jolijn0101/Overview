@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './TaskMenu.css';
-import { selectTaskMenuState, setTaskMenuState, removeTodo, setLoadingStatus, saveNewDeadline, selectTodos } from '../../../Redux/todoistSlice';
+import { selectTaskMenuState, setTaskMenuState, removeTodo, setLoadingStatus, saveNewDeadline, selectTodos, setNewPriority } from '../../../Redux/todoistSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { api } from '../../../App/App';
 
@@ -17,7 +17,28 @@ const TaskMenu = () => {
   useEffect(() => {
     if (taskMenuState.state === true) {
       console.log(todoObject);
+      //checks if theres a deadline
       todoObject.due === null ? setNewDeadline('') : setNewDeadline(todoObject.due.date);
+      //checks if thers a priority
+      if (todoObject.priority !== [1, 'white']) {
+        switch (todoObject.priority) {
+          case 1:
+            setpriorityArr([1, 'white']);
+            break;
+          case 2:
+            setpriorityArr([2, 'blue']);
+            break;
+          case 3:
+            setpriorityArr([3, 'orange']);
+            break;
+          case 4:
+            setpriorityArr([4, 'red']);
+            break;
+
+          default:
+            break;
+        }
+      }
       document.querySelector('#task_menu_container').style.display = 'flex';
     }
     if (taskMenuState.state === false) {
@@ -29,7 +50,7 @@ const TaskMenu = () => {
     //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
 
-    if (newDeadline !== todoObject.due.date) {
+    /*if (newDeadline !== todoObject.due.date) {
       //save new data
       if (newDeadline !== '') {
         dispatch(setLoadingStatus(true));
@@ -47,6 +68,14 @@ const TaskMenu = () => {
           .updateTask(taskMenuState.id, { due_date: newDeadline })
           .then((isSuccess) => saveDataTrue(isSuccess))
           .catch((error) => saveDataFalse(error));
+      }
+    }*/
+
+    if (priorityArr[0] !== todoObject.priority) {
+      if (priorityArr[0] !== todoObject.priority) {
+        console.log(priorityArr);
+        dispatch(setNewPriority({ priority: priorityArr[0], taskId: todoObject.id }));
+        setpriorityArr([1, 'white']);
       }
     }
   }

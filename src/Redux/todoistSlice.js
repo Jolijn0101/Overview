@@ -106,6 +106,10 @@ export const todoistSlice = createSlice({
       let taskObjectIndex = state.todos.findIndex((todo) => todo.id === action.payload.taskId);
       state.todos[taskObjectIndex] = action.payload;
     },
+    setNewPriority: (state, action) => {
+      let taskObjectIndex = state.todos.findIndex((todo) => todo.id === action.payload.taskId);
+      state.todos[taskObjectIndex].priority = action.payload.priority;
+    },
   },
 });
 
@@ -132,5 +136,6 @@ export const {
   setProjectMenuState,
   setTaskMenuState,
   saveNewDeadline,
+  setNewPriority,
 } = todoistSlice.actions;
 export default todoistSlice.reducer;
