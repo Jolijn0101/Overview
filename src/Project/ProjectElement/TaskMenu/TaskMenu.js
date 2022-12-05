@@ -10,10 +10,10 @@ const TaskMenu = () => {
   const dispatch = useDispatch();
   const [newDeadline, setNewDeadline] = useState('');
   const trackNewDeadline = (e) => setNewDeadline(e.target.value);
+  let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
 
   useEffect(() => {
     if (taskMenuState.state === true) {
-      let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
       console.log(todoObject);
       todoObject.due === null ? setNewDeadline('') : setNewDeadline(todoObject.due.date);
       document.querySelector('#task_menu_container').style.display = 'flex';
@@ -27,23 +27,25 @@ const TaskMenu = () => {
     //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
 
-    //save new data
-    if (newDeadline !== '') {
-      dispatch(setLoadingStatus(true));
-      function saveDataTrue(isSuccess) {
-        console.log(isSuccess);
-        dispatch(saveNewDeadline(isSuccess));
-        dispatch(setLoadingStatus(false));
+    if (newDeadline !== todoObject.due.date) {
+      //save new data
+      if (newDeadline !== '') {
+        dispatch(setLoadingStatus(true));
+        function saveDataTrue(isSuccess) {
+          console.log(isSuccess);
+          dispatch(saveNewDeadline(isSuccess));
+          dispatch(setLoadingStatus(false));
+        }
+        function saveDataFalse(error) {
+          console.log(error);
+          dispatch(setLoadingStatus(false));
+          alert('Server Error, try again');
+        }
+        api
+          .updateTask(taskMenuState.id, { due_date: newDeadline })
+          .then((isSuccess) => saveDataTrue(isSuccess))
+          .catch((error) => saveDataFalse(error));
       }
-      function saveDataFalse(error) {
-        console.log(error);
-        dispatch(setLoadingStatus(false));
-        alert('Server Error, try again');
-      }
-      api
-        .updateTask(taskMenuState.id, { due_date: newDeadline })
-        .then((isSuccess) => saveDataTrue(isSuccess))
-        .catch((error) => saveDataFalse(error));
     }
   }
 
