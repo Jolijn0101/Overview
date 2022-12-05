@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: true,
   sideMenuState: false,
   projectMenuState: false,
   taskMenuState: { state: false, id: false },
@@ -37,26 +37,26 @@ const initialState = {
   ],
   todos: [
     //Inbox
-    { id: '2995104339', content: 'Check mail', due: { date: false }, projectId: '220474322' },
-    { id: '2995104340', content: 'watch Netflix', due: { date: false }, projectId: '220474322' },
-    { id: '2995104341', content: 'book vacation', due: { date: false }, projectId: '220474322' },
+    { id: '2995104339', content: 'Check mail', due: { date: false }, priority: 1, projectId: '220474322' },
+    { id: '2995104340', content: 'watch Netflix', due: { date: false }, priority: 1, projectId: '220474322' },
+    { id: '2995104341', content: 'book vacation', due: { date: false }, priority: 1, projectId: '220474322' },
 
     //persoonlijk
-    { id: '2995104342', content: 'vacum kitchen', due: { date: false }, projectId: '220474323' },
-    { id: '2995104343', content: 'Buy Milk', due: { date: false }, projectId: '220474323' },
-    { id: '2995104344', content: 'clean bathroom', due: { date: false }, projectId: '220474323' },
+    { id: '2995104342', content: 'vacum kitchen', due: { date: false }, priority: 1, projectId: '220474323' },
+    { id: '2995104343', content: 'Buy Milk', due: { date: false }, priority: 1, projectId: '220474323' },
+    { id: '2995104344', content: 'clean bathroom', due: { date: false }, priority: 1, projectId: '220474323' },
 
     //Hobby
-    { id: '2995104345', content: 'sew hem', due: { date: false }, projectId: '220474324' },
-    { id: '2995104346', content: 'Buy skirt hook', due: { date: false }, projectId: '220474324' },
-    { id: '2995104347', content: 'draw pattern', due: { date: false }, projectId: '220474324' },
+    { id: '2995104345', content: 'sew hem', due: { date: false }, priority: 1, projectId: '220474324' },
+    { id: '2995104346', content: 'Buy skirt hook', due: { date: false }, priority: 1, projectId: '220474324' },
+    { id: '2995104347', content: 'draw pattern', due: { date: false }, priority: 1, projectId: '220474324' },
 
     //Project 2
-    { id: '2995104348', content: 'todo 1', due: { date: false }, projectId: '220474325' },
-    { id: '2995104349', content: 'todo 2', due: { date: false }, projectId: '220474325' },
-    { id: '2995104350', content: 'todo 3', due: { date: false }, projectId: '220474325' },
+    { id: '2995104348', content: 'todo 1', due: { date: false }, priority: 1, projectId: '220474325' },
+    { id: '2995104349', content: 'todo 2', due: { date: false }, priority: 1, projectId: '220474325' },
+    { id: '2995104350', content: 'todo 3', due: { date: false }, priority: 1, projectId: '220474325' },
   ],
-  loading: true,
+  loading: false,
 };
 
 export const todoistSlice = createSlice({

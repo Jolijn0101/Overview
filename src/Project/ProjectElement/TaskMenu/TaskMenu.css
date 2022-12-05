@@ -11,10 +11,9 @@
 #task_menu {
   background-color: var(--first-color);
   width: 320px;
-  height: 50vh;
   border-radius: 20px 0px 20px 0px;
   padding: 2rem;
-  color: white;
+  color: var(--fourth-color);
   overflow: hidden;
 }
 
@@ -29,27 +28,68 @@
   margin-bottom: 1.5rem;
 }
 
-#task_menu section {
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-#task_menu #deadline_task_container {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 #task_menu_container h4 {
-  color: white;
+  color: var(--fourth-color);
   margin-bottom: 0.5rem;
 }
 
-#remove_task_container h4 {
-  margin-left: 1rem;
+#task_menu section {
+  margin-bottom: 2rem;
 }
 
-/* deadline picker */
+/* add priority */
+#drop_menu {
+  position: relative;
+}
+
+#drop_menu_top {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  background-color: var(--fourth-color);
+}
+
+#drop_menu_top {
+  display: flex;
+  flex-direction: row;
+}
+
+#drop_menu_top p {
+  margin: 0;
+  color: black;
+  width: 95%;
+}
+
+#drop_menu p svg {
+  color: blue;
+  margin-left: 0.5rem;
+  transform: translateY(2px);
+}
+
+#drop_menu svg {
+  color: black;
+  transform: translateY(2px);
+}
+
+#drop_menu_bottom {
+  position: absolute;
+  display: none;
+  width: 100%;
+  background-color: var(--fourth-color);
+  border-radius: 0px 0px 5px 5px;
+  padding: 10px;
+  line-height: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#drop_menu_bottom p {
+  color: black;
+}
+
+/* add deadline */
+
 #deadline {
   border: none;
   padding: 10px;
@@ -62,4 +102,15 @@
 
 ::-webkit-calendar-picker-indicator {
   cursor: pointer;
+}
+
+/* remove task */
+
+#remove_task_container h4 {
+  margin-left: 1rem;
+}
+
+#task_menu #remove_task_container {
+  display: flex;
+  align-items: center;
 }
