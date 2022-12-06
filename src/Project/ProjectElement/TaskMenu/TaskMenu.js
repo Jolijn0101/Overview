@@ -115,13 +115,13 @@ const TaskMenu = () => {
 
   function dropDownMenu() {
     if (dropDownState === false) {
-      document.querySelector('#drop_menu_top #arrow').style.transform = 'rotate(180deg)';
-      document.querySelector('#drop_menu_bottom').style.display = 'block';
+      document.querySelector('#task_menu #drop_menu_top #arrow').style.transform = 'rotate(180deg)';
+      document.querySelector('#task_menu #drop_menu_bottom').style.display = 'block';
       setDropDownState(true);
     }
     if (dropDownState === true) {
-      document.querySelector('#drop_menu_top #arrow').style.transform = 'rotate(0deg)';
-      document.querySelector('#drop_menu_bottom').style.display = 'none';
+      document.querySelector('#task_menu #drop_menu_top #arrow').style.transform = 'rotate(0deg)';
+      document.querySelector('#task_menu #drop_menu_bottom').style.display = 'none';
       setDropDownState(false);
     }
   }

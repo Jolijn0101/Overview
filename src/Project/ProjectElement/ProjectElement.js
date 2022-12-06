@@ -157,7 +157,7 @@ const ProjectElement = ({ projectProp }) => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    {window.screen.width >= 1024 ? <TaskMenuDesktop /> : null}
+                    {window.screen.width >= 1024 ? <TaskMenuDesktop taskId={task.id} /> : null}
                   </li>
                 );
               })

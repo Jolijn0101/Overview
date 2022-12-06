@@ -3,27 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectTaskMenuState, selectTodos } from '../../../Redux/todoistSlice';
 import './TaskMenuDesktop.css';
 
-const TaskMenuDesktop = () => {
-  const taskMenuState = useSelector(selectTaskMenuState);
-  const [dropDownState, setDropDownState] = useState(false);
+const TaskMenuDesktop = ({ taskId }) => {
   const [priorityArr, setpriorityArr] = useState([1, 'white']);
   const todos = useSelector(selectTodos);
   const dispatch = useDispatch();
   const [newDeadline, setNewDeadline] = useState('');
   const trackNewDeadline = (e) => setNewDeadline(e.target.value);
-  let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
+  let todoObject = todos.find((todo) => todo.id === taskId);
 
   function dropDownMenu() {
-    if (dropDownState === false) {
-      document.querySelector('#drop_menu_top #arrow').style.transform = 'rotate(180deg)';
-      document.querySelector('#drop_menu_bottom').style.display = 'block';
-      setDropDownState(true);
-    }
-    if (dropDownState === true) {
-      document.querySelector('#drop_menu_top #arrow').style.transform = 'rotate(0deg)';
-      document.querySelector('#drop_menu_bottom').style.display = 'none';
-      setDropDownState(false);
-    }
+    document.querySelector(`.TaskMenuDesktop #drop_menu_top #arrow`).classList.toggle('rotate_icon');
+    document.querySelector(`.TaskMenuDesktop #drop_menu_bottom`).classList.toggle('open_drop_menu');
   }
 
   function changePriority(num, color) {
@@ -31,7 +21,7 @@ const TaskMenuDesktop = () => {
     dropDownMenu();
   }
   return (
-    <div id="TaskMenuDesktop">
+    <div className="TaskMenuDesktop" id={`TaskMenuDesktop_${taskId}`}>
       <div id="drop_menu">
         <div id="drop_menu_top" onClick={dropDownMenu}>
           <p>

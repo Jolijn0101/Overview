@@ -1,4 +1,4 @@
-#TaskMenuDesktop {
+.TaskMenuDesktop {
   width: 400px;
   display: flex;
   margin-left: 1rem;
@@ -7,11 +7,11 @@
 }
 
 /* priority */
-#TaskMenuDesktop #drop_menu {
+.TaskMenuDesktop #drop_menu {
   position: relative;
 }
 
-#TaskMenuDesktop #drop_menu_top {
+.TaskMenuDesktop #drop_menu_top {
   padding: 10px;
   width: 150px;
   height: 40px;
@@ -22,29 +22,29 @@
   border: solid 1px gray;
 }
 
-#TaskMenuDesktop #drop_menu_top {
+.TaskMenuDesktop #drop_menu_top {
   display: flex;
   flex-direction: row;
 }
 
-#TaskMenuDesktop #drop_menu_top p {
+.TaskMenuDesktop #drop_menu_top p {
   margin: 0;
   color: black;
   width: 95%;
 }
 
-#TaskMenuDesktop #drop_menu p svg {
+.TaskMenuDesktop #drop_menu p svg {
   color: blue;
   margin-left: 0.5rem;
   transform: translateY(2px);
 }
 
-#TaskMenuDesktop #drop_menu svg {
+.TaskMenuDesktop #drop_menu svg {
   color: black;
   transform: translateY(2px);
 }
 
-#TaskMenuDesktop #drop_menu_bottom {
+.TaskMenuDesktop #drop_menu_bottom {
   position: absolute;
   display: none;
   width: 100%;
@@ -56,13 +56,22 @@
   z-index: 100;
 }
 
-#TaskMenuDesktop #drop_menu_bottom p {
+.TaskMenuDesktop #drop_menu_bottom p {
   color: black;
   width: 100%;
 }
 
+/* toggle class for opening drop_menu */
+.open_drop_menu {
+  display: block important;
+}
+
+.rotate_icon {
+  transform: rotate(180deg) important;
+}
+
 /* deadline */
-#TaskMenuDesktop #deadline {
+.TaskMenuDesktop #deadline {
   border: none;
   padding: 10px;
   width: 150px;
@@ -74,12 +83,12 @@
   border: solid 1px gray;
 }
 
-#TaskMenuDesktop ::-webkit-calendar-picker-indicator {
+.TaskMenuDesktop ::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
 /* remove btn */
-#TaskMenuDesktop .task__trash-icon {
+.TaskMenuDesktop .task__trash-icon {
   color: gray;
   transform: translateY(5px);
 }
