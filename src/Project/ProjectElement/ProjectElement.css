@@ -71,3 +71,9 @@
   background-color: var(--third-color);
   cursor: pointer;
 }
+
+@media screen and (min-width: 1024px) {
+  .dots_ico {
+    display: none;
+  }
+}

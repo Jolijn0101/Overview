@@ -14,6 +14,7 @@ import {
 import './ProjectElement.css';
 import { api } from '../../App/App';
 import TaskMenu from './TaskMenu/TaskMenu';
+import TaskMenuDesktop from './TaskMenuDesktop/TaskMenuDesktop';
 
 const ProjectElement = ({ projectProp }) => {
   let { projectName } = useParams();
@@ -124,7 +125,7 @@ const ProjectElement = ({ projectProp }) => {
     <div className="ProjectElement">
       {projectObject ? (
         <>
-          <TaskMenu />
+          {window.screen.width < 1024 ? <TaskMenu /> : null}
           {projectProp ? <h2>{projectName}</h2> : <h1>{projectName}</h1>}
           <ul className="project__todo-list">
             {projectTasks.length >= 1 ? (
@@ -156,6 +157,7 @@ const ProjectElement = ({ projectProp }) => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
+                    {window.screen.width >= 1024 ? <TaskMenuDesktop /> : null}
                   </li>
                 );
               })

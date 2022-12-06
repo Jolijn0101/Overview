@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: true,
   sideMenuState: false,
   projectMenuState: false,
   taskMenuState: { state: false, id: false },
@@ -37,7 +37,13 @@ const initialState = {
   ],
   todos: [
     //Inbox
-    { id: '2995104339', content: 'Check mail', due: { date: false }, priority: 1, projectId: '220474322' },
+    {
+      id: '2995104339',
+      content: 'Check mail dit is een groot onzin verhaal om te kijken of alles op zn plek blijft met een groot todo verhaal',
+      due: { date: false },
+      priority: 1,
+      projectId: '220474322',
+    },
     { id: '2995104340', content: 'watch Netflix', due: { date: false }, priority: 1, projectId: '220474322' },
     { id: '2995104341', content: 'book vacation', due: { date: false }, priority: 1, projectId: '220474322' },
 
@@ -56,7 +62,7 @@ const initialState = {
     { id: '2995104349', content: 'todo 2', due: { date: false }, priority: 1, projectId: '220474325' },
     { id: '2995104350', content: 'todo 3', due: { date: false }, priority: 1, projectId: '220474325' },
   ],
-  loading: true,
+  loading: false,
 };
 
 export const todoistSlice = createSlice({
