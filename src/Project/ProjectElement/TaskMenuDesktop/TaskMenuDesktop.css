@@ -1,5 +1,7 @@
 .TaskMenuDesktop{
-  margin-left: 1rem
+  margin-left: 1rem;
+  display:flex;
+  gap: 10px;
 }
 
 /* priority menu */
@@ -11,7 +13,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  width: 150px;
+  width: 140px;
   height: 40px;
   border-radius: 5px;
   border: 1px solid gray;
@@ -52,4 +54,27 @@
 #drop_menu_bottom_desktop svg{
   margin-left: 8px;
   transform: translateY(3px);
+}
+
+/* deadline menu */
+#deadline_desktop {
+  border: none;
+  padding: 10px;
+  width: 140px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+#deadline_desktop::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* remove task */
+.task__trash-icon_desktop{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 7px;
 }

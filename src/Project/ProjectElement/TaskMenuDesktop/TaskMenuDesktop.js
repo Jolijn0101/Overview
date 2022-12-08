@@ -1,16 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import './TaskMenuDesktop.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectTodos, setNewPriority, setLoadingStatus} from '../../../Redux/todoistSlice.js';
+import {selectTodos, setNewPriority, setLoadingStatus, removeTodo} from '../../../Redux/todoistSlice.js';
 import {api} from '../../../App/App.js';
 
 const TaskMenuDesktop = ({ taskId }) => {
   let task_id = taskId;
   const dispatch = useDispatch();
-  const [menuState, setMenuState] = useState(false);
-  const [priorityArr, setPriorityArr] = useState([1,'white']);
   const todos = useSelector(selectTodos);
   let todoObject = todos.find((todo) => todo.id === task_id);
+
+  //for deadline
+  const [newDeadline, setNewDeadline] = useState('');
+
+  //for priority
+  const [menuState, setMenuState] = useState(false);
+  const [priorityArr, setPriorityArr] = useState([1,'white']);
 
 //set priority by first render
   useEffect(() => {
@@ -73,6 +78,29 @@ const TaskMenuDesktop = ({ taskId }) => {
     }
     drop_down()
 }
+  function trackNewDeadline(e){
+    setNewDeadline(e.target.value);
+  }
+
+  function removeTask() {
+    function removeTaskTrue(isSuccess) {
+      console.log(isSuccess);
+      dispatch(removeTodo(todoObject.id));
+      dispatch(setLoadingStatus(false));
+    }
+
+    function removeTaskFalse(error) {
+      dispatch(setLoadingStatus(false));
+      console.log(error);
+      alert('Server Error, try again');
+    }
+    dispatch(setLoadingStatus(true));
+    api
+      .deleteTask(todoObject.id)
+      .then((isSuccess) => removeTaskTrue(isSuccess))
+      .catch((error) => removeTaskFalse(error));
+  }
+
 
   return (
     <div id={`TaskMenuDesktop${taskId}`} className='TaskMenuDesktop'>
@@ -163,8 +191,21 @@ const TaskMenuDesktop = ({ taskId }) => {
         </p>
       </li>
     </ul>
-
     </div>
+    <input type="date" id="deadline_desktop" name="deadline" value={newDeadline} onChange={trackNewDeadline}></input>
+    <svg
+      onClick={removeTask}
+      className="task__trash-icon_desktop"
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 448 512"
+      height="1.8em"
+      width="1.8em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path>
+    </svg>
     </div>
   );
 };
