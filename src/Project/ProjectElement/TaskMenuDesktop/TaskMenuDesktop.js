@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './TaskMenuDesktop.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectTodos, setNewPriority} from '../../../Redux/todoistSlice.js';
+import {selectTodos, setNewPriority, setLoadingStatus} from '../../../Redux/todoistSlice.js';
+import {api} from '../../../App/App.js';
 
 const TaskMenuDesktop = ({ taskId }) => {
   let task_id = taskId;
@@ -47,11 +48,28 @@ const TaskMenuDesktop = ({ taskId }) => {
   function changePriority(num, color) {
     //only continue if priority isn't the same
     if (num !== todoObject.priority) {
-      //saves the new priority in Redux
-      let newPriorityObject = { id: todoObject.id, content: todoObject.content, due: { date: todoObject.due.date }, priority: num, projectId: todoObject.projectId }
-      dispatch(setNewPriority(newPriorityObject));
-      //sets the color and number in the DOM
-      setPriorityArr([num, color])
+      //sets loading screen on
+      dispatch(setLoadingStatus(true));
+
+      //function if it went well
+      function saveDataTrue(isSuccess) {
+        console.log(isSuccess);
+        dispatch(setNewPriority(isSuccess));
+        setPriorityArr([num, color]);
+        dispatch(setLoadingStatus(false));
+      }
+
+      //function if it gets an error
+      function saveDataFalse(error) {
+        console.log(error);
+        dispatch(setLoadingStatus(false));
+        alert('Server Error, add priority again');
+      }
+      api
+        .updateTask(todoObject.id, { priority: num })
+        .then((isSuccess) => saveDataTrue(isSuccess))
+        .catch((error) => saveDataFalse(error));
+
     }
     drop_down()
 }

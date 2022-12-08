@@ -16,11 +16,9 @@ const TaskMenu = () => {
 
   useEffect(() => {
     if (taskMenuState.state === true) {
-      console.log(todoObject);
       //checks if theres a deadline
       todoObject.due === null ? setNewDeadline('') : setNewDeadline(todoObject.due.date);
-      //checks if thers a priority
-      if (todoObject.priority !== [1, 'white']) {
+      //checks witch priority to show
         switch (todoObject.priority) {
           case 1:
             setpriorityArr([1, 'white']);
@@ -37,8 +35,7 @@ const TaskMenu = () => {
 
           default:
             break;
-        }
-      }
+          }
       document.querySelector('#task_menu_container').style.display = 'flex';
     }
     if (taskMenuState.state === false) {
