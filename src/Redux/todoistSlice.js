@@ -53,8 +53,8 @@ const initialState = {
     { id: '2995104344', content: 'clean bathroom', due: { date: false }, priority: 1, projectId: '220474323' },
 
     //Hobby
-    { id: '2995104345', content: 'sew hem', due: { date: false }, priority: 1, projectId: '220474324' },
-    { id: '2995104346', content: 'Buy skirt hook', due: { date: false }, priority: 1, projectId: '220474324' },
+    { id: '2995104345', content: 'sew hem', due: { date: false }, priority: 2, projectId: '220474324' },
+    { id: '2995104346', content: 'Buy skirt hook', due: { date: false }, priority: 4, projectId: '220474324' },
     { id: '2995104347', content: 'draw pattern', due: { date: false }, priority: 1, projectId: '220474324' },
 
     //Project 2

@@ -1,100 +1,55 @@
-.TaskMenuDesktop {
-  width: 400px;
+.TaskMenuDesktop{
+  margin-left: 1rem
+}
+
+/* priority menu */
+#drop_menu_desktop{
+  position:relative;
+}
+
+#drop_menu_top_desktop{
   display: flex;
-  margin-left: 1rem;
-  gap: 20px;
-  display: none;
-}
-
-/* priority */
-.TaskMenuDesktop #drop_menu {
-  position: relative;
-}
-
-.TaskMenuDesktop #drop_menu_top {
+  align-items: center;
   padding: 10px;
   width: 150px;
   height: 40px;
   border-radius: 5px;
+  border: 1px solid gray;
   font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   background-color: var(--fourth-color);
-  border: solid 1px gray;
 }
 
-.TaskMenuDesktop #drop_menu_top {
-  display: flex;
-  flex-direction: row;
-}
-
-.TaskMenuDesktop #drop_menu_top p {
-  margin: 0;
+#drop_menu_top_desktop p{
+  margin-top: 0px;
   color: black;
   width: 95%;
 }
 
-.TaskMenuDesktop #drop_menu p svg {
+#drop_menu_top_desktop p svg {
   color: blue;
   margin-left: 0.5rem;
   transform: translateY(2px);
 }
 
-.TaskMenuDesktop #drop_menu svg {
-  color: black;
-  transform: translateY(2px);
-}
-
-.TaskMenuDesktop #drop_menu_bottom {
+#drop_menu_bottom_desktop {
   position: absolute;
   display: none;
+  z-index: 100;
   width: 100%;
   background-color: var(--fourth-color);
   border-radius: 0px 0px 5px 5px;
   padding: 10px;
   line-height: 2rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 100;
 }
 
-.TaskMenuDesktop #drop_menu_bottom p {
-  color: black;
+#drop_menu_bottom_desktop p{
   width: 100%;
+  color: black;
 }
 
-/* toggle class for opening drop_menu */
-.open_drop_menu {
-  display: block important;
-}
-
-.rotate_icon {
-  transform: rotate(180deg) important;
-}
-
-/* deadline */
-.TaskMenuDesktop #deadline {
-  border: none;
-  padding: 10px;
-  width: 150px;
-  height: 40px;
-  border-radius: 5px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
-  outline: none;
-  border: solid 1px gray;
-}
-
-.TaskMenuDesktop ::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-}
-
-/* remove btn */
-.TaskMenuDesktop .task__trash-icon {
-  color: gray;
-  transform: translateY(5px);
-}
-
-@media screen and (min-width: 1024px) {
-  #TaskMenuDesktop {
-    display: flex;
-  }
+#drop_menu_bottom_desktop svg{
+  margin-left: 8px;
+  transform: translateY(3px);
 }

@@ -73,7 +73,6 @@ const TaskMenu = () => {
 
     //save priority
     if (priorityArr[0] !== todoObject.priority) {
-      if (priorityArr[0] !== todoObject.priority) {
         dispatch(setLoadingStatus(true));
         function saveDataTrue(isSuccess) {
           console.log(isSuccess);
@@ -89,7 +88,6 @@ const TaskMenu = () => {
           .updateTask(taskMenuState.id, { priority: priorityArr[0] })
           .then((isSuccess) => saveDataTrue(isSuccess))
           .catch((error) => saveDataFalse(error));
-      }
     }
   }
 
