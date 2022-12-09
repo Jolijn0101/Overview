@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './TaskMenuDesktop.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectTodos, setNewPriority, setLoadingStatus, removeTodo} from '../../../Redux/todoistSlice.js';
+import {selectTodos, setNewPriority, setLoadingStatus, removeTodo, saveNewDeadline} from '../../../Redux/todoistSlice.js';
 import {api} from '../../../App/App.js';
 
 const TaskMenuDesktop = ({ taskId }) => {
@@ -11,7 +11,7 @@ const TaskMenuDesktop = ({ taskId }) => {
   let todoObject = todos.find((todo) => todo.id === task_id);
 
   //for deadline
-  const [newDeadline, setNewDeadline] = useState('dd-mm-yyyy');
+  const [newDeadline, setNewDeadline] = useState('yyyy-mm-dd');
 
   //for priority
   const [menuState, setMenuState] = useState(false);
@@ -19,6 +19,9 @@ const TaskMenuDesktop = ({ taskId }) => {
 
 //set priority by first render
   useEffect(() => {
+    if(todoObject.due !== null){
+    setNewDeadline(todoObject.due.date);
+   }
     switch (todoObject.priority) {
       case 1:
         setPriorityArr([1, 'white']);
@@ -37,6 +40,8 @@ const TaskMenuDesktop = ({ taskId }) => {
         break;
     }
   }, []);
+
+
 
   function drop_down(){
     if(menuState === false){
@@ -81,6 +86,30 @@ const TaskMenuDesktop = ({ taskId }) => {
   function trackNewDeadline(e){
     setNewDeadline(e.target.value);
   }
+
+  useEffect(() => {
+    //Check if the length of the string matches and isn't the same as the old newDeadline string
+    if(newDeadline.length === 10 && newDeadline !== 'yyyy-mm-dd'){
+      //the deadline has to be different then the previous one
+      if(todoObject.due === null || todoObject.due.date !== newDeadline){
+        //check if the string matches the pattern
+        if(newDeadline.match(/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g)){
+          console.log('het matched')
+          //check if the month and day number aren't to big
+          let month = Number(newDeadline[5] + newDeadline[6]);
+          let day = Number(newDeadline[8] + newDeadline[9]);
+          if(month < 13 || day < 31){
+            dispatch(saveNewDeadline({ id: todoObject.id, content: todoObject.content, due: { date: newDeadline }, priority: 1, projectId: todoObject.projectId }));
+          }
+          else{
+            alert('day or month input are to big')
+          }
+        }else{
+          alert('deadline input does not match the pattern');
+        }
+      }
+    }
+  }, [newDeadline]);
 
   function removeTask() {
     function removeTaskTrue(isSuccess) {
