@@ -30,10 +30,8 @@ const initialState = {
   ],
   projects: [
     { id: '220474322', color: 'grey', name: 'Inbox' },
-    { id: '220474323', color: 'red', name: 'Persoonlijk' },
-    { id: '220474324', color: 'blue', name: 'Hobby' },
-    { id: '220474325', color: 'green', name: 'Project 2' },
-    { id: '220474326', color: 'green', name: 'Project test' },
+    { id: '220474323', color: 'red', name: 'Work' },
+    { id: '220474324', color: 'blue', name: 'House' },
   ],
   todos: [
     //Inbox
@@ -44,23 +42,20 @@ const initialState = {
       priority: 1,
       projectId: '220474322',
     },
-    { id: '2995104340', content: 'watch Netflix', due: { date: '2013-03-02' }, priority: 1, projectId: '220474322' },
+    { id: '2995104340', content: 'pay taxes', due: { date: '2023-03-02' }, priority: 1, projectId: '220474322' },
     { id: '2995104341', content: 'book vacation', due: null, priority: 1, projectId: '220474322' },
 
-    //persoonlijk
-    { id: '2995104342', content: 'vacum kitchen', due: null, priority: 1, projectId: '220474323' },
-    { id: '2995104343', content: 'Buy Milk', due: null, priority: 1, projectId: '220474323' },
-    { id: '2995104344', content: 'clean bathroom', due: null, priority: 1, projectId: '220474323' },
+    //work
+    { id: '2995104342', content: 'check mail', due: null, priority: 1, projectId: '220474323' },
+    { id: '2995104343', content: 'clean desk', due: null, priority: 1, projectId: '220474323' },
+    { id: '2995104344', content: 'update software', due: null, priority: 1, projectId: '220474323' },
 
-    //Hobby
-    { id: '2995104345', content: 'sew hem', due: null, priority: 2, projectId: '220474324' },
-    { id: '2995104346', content: 'Buy skirt hook', due: null, priority: 4, projectId: '220474324' },
-    { id: '2995104347', content: 'draw pattern', due: null, priority: 1, projectId: '220474324' },
+    //House
+    { id: '2995104345', content: 'clean kitchen', due: null, priority: 2, projectId: '220474324' },
+    { id: '2995104346', content: 'paint door', due: null, priority: 4, projectId: '220474324' },
+    { id: '2995104347', content: 'clean windows', due: null, priority: 1, projectId: '220474324' },
 
-    //Project 2
-    { id: '2995104348', content: 'todo 1', due: null, priority: 1, projectId: '220474325' },
-    { id: '2995104349', content: 'todo 2', due: null, priority: 1, projectId: '220474325' },
-    { id: '2995104350', content: 'todo 3', due: null, priority: 1, projectId: '220474325' },
+
   ],
   loading: false,
 };
