@@ -35,7 +35,7 @@
   font-size: 1.5rem;
   text-align: center;
   padding-top: 1.9px;
-  border-radius: 50%;
+  border-radius: 10px;
   margin-right: 14px;
 }
 
@@ -75,10 +75,4 @@
 .add-todo__input_field button:hover {
   background-color: var(--third-color);
   cursor: pointer;
-}
-
-@media screen and (min-width: 1024px) {
-  .dots_ico {
-    display: none;
-  }
 }

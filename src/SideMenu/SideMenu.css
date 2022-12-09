@@ -63,7 +63,7 @@
   width: 2rem;
   height: 2rem;
   background-color: var(--fifth-color);
-  border-radius: 50%;
+  border-radius: 10px;
   margin-right: 0.8rem;
   text-align: center;
   font-size: 1.4rem;

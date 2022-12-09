@@ -1,6 +1,6 @@
 .TaskMenuDesktop{
   margin-left: 1rem;
-  display:flex;
+  display:none;
   gap: 10px;
 }
 
@@ -83,11 +83,15 @@
   margin-top: 11px;
 }
 
-
-
 /* remove task */
 .task__trash-icon_desktop{
   width: 1.5rem;
   height: 1.5rem;
   margin-top: 7px;
+}
+
+@media screen and (min-width: 1024px) {
+  .TaskMenuDesktop{
+    display: flex;
+  }
 }
