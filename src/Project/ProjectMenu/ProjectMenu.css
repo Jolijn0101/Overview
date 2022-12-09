@@ -93,3 +93,10 @@
   margin-left: 66px;
   margin-top: 2rem;
 }
+
+@media screen and (min-width: 768px) {
+  #project_menu{
+    margin-left: 0px;
+    transform: translateX(-40%);
+  }
+}
