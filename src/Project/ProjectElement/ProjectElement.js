@@ -52,7 +52,7 @@ const ProjectElement = ({ projectProp }) => {
     if (toggle === true) {
       document.querySelector(`#project__add-todo_${projectObject.id} h4`).style.display = 'inline';
       document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).innerHTML = '+';
-      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).style.backgroundColor = 'var(--second-color)';
+      document.querySelector(`#add-todo_toggle_btn_${projectObject.id}`).style.backgroundColor = 'var(--fifth-color)';
       document.querySelector(`#add-todo__input_field_${projectObject.id}`).style.display = 'none';
       setToggle(false);
     }

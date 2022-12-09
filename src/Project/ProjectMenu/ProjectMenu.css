@@ -6,6 +6,7 @@
   height: 100vh;
   width: 100vw;
   transform: translate(-2rem, -0.5rem);
+  z-index: 500;
 }
 
 #project_menu {
