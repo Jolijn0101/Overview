@@ -10,14 +10,15 @@ const TaskMenu = () => {
   const [priorityArr, setpriorityArr] = useState([1, 'white']);
   const todos = useSelector(selectTodos);
   const dispatch = useDispatch();
-  const [newDeadline, setNewDeadline] = useState('');
+  const [newDeadline, setNewDeadline] = useState('yyyy-mm-dd');
   const trackNewDeadline = (e) => setNewDeadline(e.target.value);
   let todoObject = todos.find((todo) => todo.id === taskMenuState.id);
 
+//checks when menu will be opend and gets the first values
   useEffect(() => {
     if (taskMenuState.state === true) {
       //checks if theres a deadline
-      todoObject.due === null ? setNewDeadline('') : setNewDeadline(todoObject.due.date);
+      todoObject.due === null ? setNewDeadline('yyyy-mm-dd') : setNewDeadline(todoObject.due.date);
       //checks witch priority to show
         switch (todoObject.priority) {
           case 1:
@@ -42,33 +43,60 @@ const TaskMenu = () => {
       document.querySelector('#task_menu_container').style.display = 'none';
     }
   }, [taskMenuState]);
-
+  function saveDeadlineApi(){
+    dispatch(setLoadingStatus(true));
+    //function if api call is a succes
+    function saveDataTrue(isSuccess) {
+      console.log(isSuccess);
+      dispatch(saveNewDeadline(isSuccess));
+      dispatch(setLoadingStatus(false));
+    }
+    //function if api call has an error
+    function saveDataFalse(error) {
+      console.log(error);
+      dispatch(setLoadingStatus(false));
+      alert('Server Error, add deadline again');
+    }
+    api
+      .updateTask(taskMenuState.id, { due_date: newDeadline })
+      .then((isSuccess) => saveDataTrue(isSuccess))
+      .catch((error) => saveDataFalse(error));
+  }
+  function saveDeadline(){
+    //the deadline has to be different then the previous one
+    if(newDeadline !== 'yyyy-mm-dd'){
+      //check if theres a .due.date property if so is the newDeadline the same?
+      if(todoObject.due !== null){
+        if(todoObject.due.date === newDeadline){
+          return
+        }
+      }
+      //check if the string matches the pattern
+      if(newDeadline.match(/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g)){
+        //check if the month and day number aren't to big
+        let month = Number(newDeadline[5] + newDeadline[6]);
+        let day = Number(newDeadline[8] + newDeadline[9]);
+        if(month < 13 || day < 31){
+          //this function makes the api call and saves the new deadline
+          saveDeadlineApi()
+          //dispatch(saveNewDeadline({ id: todoObject.id, content: todoObject.content, due: { date: newDeadline }, priority: 1, projectId: todoObject.projectId }));
+        }else{
+          alert('day or month input are to big')
+        }
+      }else{
+        alert('deadline input does not match the pattern');
+      }
+    }
+  }
   function closeTaskMenu() {
     //close menu
     dispatch(setTaskMenuState({ state: false, id: false }));
 
     //save deadline
-    if (newDeadline !== todoObject.due.date) {
-      if (newDeadline !== '') {
-        dispatch(setLoadingStatus(true));
-        function saveDataTrue(isSuccess) {
-          console.log(isSuccess);
-          dispatch(saveNewDeadline(isSuccess));
-          dispatch(setLoadingStatus(false));
-        }
-        function saveDataFalse(error) {
-          console.log(error);
-          dispatch(setLoadingStatus(false));
-          alert('Server Error, add deadline again');
-        }
-        api
-          .updateTask(taskMenuState.id, { due_date: newDeadline })
-          .then((isSuccess) => saveDataTrue(isSuccess))
-          .catch((error) => saveDataFalse(error));
-      }
-    }
+    saveDeadline()
 
     //save priority
+      console.log(priorityArr);
     if (priorityArr[0] !== todoObject.priority) {
         dispatch(setLoadingStatus(true));
         function saveDataTrue(isSuccess) {
@@ -239,7 +267,10 @@ const TaskMenu = () => {
         </section>
         <section id="deadline_task_container">
           <h4>add deadline</h4>
-          <input type="date" id="deadline" name="deadline" value={newDeadline} onChange={trackNewDeadline}></input>
+          <div id="deadline_input_box">
+          <input type="text" name="deadline" value={newDeadline} onChange={trackNewDeadline}></input>
+          <svg id='calendar_ico' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M152 64H296V24C296 10.75 306.7 0 320 0C333.3 0 344 10.75 344 24V64H384C419.3 64 448 92.65 448 128V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V128C0 92.65 28.65 64 64 64H104V24C104 10.75 114.7 0 128 0C141.3 0 152 10.75 152 24V64zM48 448C48 456.8 55.16 464 64 464H384C392.8 464 400 456.8 400 448V192H48V448z"/></svg>
+          </div>
         </section>
         <section id="remove_task_container" onClick={removeTask}>
           <svg

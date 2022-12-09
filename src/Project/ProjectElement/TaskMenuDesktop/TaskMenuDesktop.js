@@ -128,8 +128,12 @@ const TaskMenuDesktop = ({ taskId }) => {
   useEffect(() => {
     //Check if the length of the string matches and isn't the same as the old newDeadline string
     if(newDeadline.length === 10 && newDeadline !== 'yyyy-mm-dd'){
-      //the deadline has to be different then the previous one
-      if(todoObject.due === null || todoObject.due.date !== newDeadline){
+      //check if theres a .due.date property if so is the newDeadline the same?
+      if(todoObject.due !== null){
+        if(todoObject.due.date === newDeadline){
+          return
+        }
+      }
         //check if the string matches the pattern
         if(newDeadline.match(/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g)){
           console.log('het matched')
@@ -140,18 +144,14 @@ const TaskMenuDesktop = ({ taskId }) => {
             //this function makes the api call and saves the new deadline
             saveDeadline()
             //dispatch(saveNewDeadline({ id: todoObject.id, content: todoObject.content, due: { date: newDeadline }, priority: 1, projectId: todoObject.projectId }));
-          }
-          else{
+          }else{
             alert('day or month input are to big')
           }
         }else{
           alert('deadline input does not match the pattern');
         }
-      }
     }
   }, [newDeadline]);
-
-
 
 
   return (

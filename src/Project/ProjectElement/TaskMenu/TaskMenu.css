@@ -89,19 +89,30 @@
 }
 
 /* add deadline */
-
-#task_menu #deadline {
-  border: none;
-  padding: 10px;
+#deadline_input_box {
+  background-color: var(--fourth-color);
+  border-radius: 5px;
+  height: 40px;
   width: 100%;
+  display: flex;
+}
+
+#deadline_input_box input[type=text]{
+  border: none;
+  padding: 10px 0px 10px 10px;
+  height: 35px;
+  width: 88%;
   border-radius: 5px;
   font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   outline: none;
+  margin-right: 5px;
 }
 
-#task_menu ::-webkit-calendar-picker-indicator {
-  cursor: pointer;
+#calendar_ico{
+  width:15px;
+  height:15px;
+  margin-top: 11px;
 }
 
 /* remove task */
