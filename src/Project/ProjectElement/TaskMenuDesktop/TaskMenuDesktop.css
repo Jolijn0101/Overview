@@ -58,19 +58,32 @@
 
 /* deadline menu */
 #deadline_desktop {
-  border: none;
-  padding: 10px;
-  width: 140px;
-  height: 40px;
-  border-radius: 5px;
   border: 1px solid gray;
+  border-radius: 5px;
+  height: 40px;
+  width: 140px;
+  display: flex;
+}
+
+#deadline_desktop input[type=text]{
+  border: none;
+  padding: 10px 0px 10px 10px;
+  height: 35px;
+  width: 110px;
+  border-radius: 5px;
   font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   outline: none;
+  margin-right: 5px;
 }
-#deadline_desktop::-webkit-calendar-picker-indicator {
-  cursor: pointer;
+
+#calendar_ico{
+  width:15px;
+  height:15px;
+  margin-top: 11px;
 }
+
+
 
 /* remove task */
 .task__trash-icon_desktop{

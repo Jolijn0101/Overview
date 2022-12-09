@@ -4,7 +4,6 @@
   width: 15rem;
   position: absolute;
   margin-left: calc(100% - 15rem);
-  margin-top: -0.5rem;
   border-radius: 15px 0px 0px 15px;
   padding: 2rem;
   color: var(--fourth-color);
@@ -97,6 +96,7 @@
     margin-left: 0rem;
     transform: translateX(0rem);
     border-radius: 0px;
+    height:100vh;
   }
   .side-menu .closeBtn {
     visibility: hidden;

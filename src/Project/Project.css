@@ -1,5 +1,11 @@
 .project {
-  margin: 0.5rem 2rem 2rem 2rem;
+  margin: 0rem 2rem 0rem 2rem;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.project::-webkit-scrollbar {
+  display: none;
 }
 
 .mobile_menu_btn {
@@ -71,6 +77,10 @@
   margin-left: -0.1rem;
   margin-right: 0.8rem;
   color: var(--fifth-color);
+}
+
+.add-todo__input_field{
+  max-width: 480px;
 }
 
 .project__remove-project {
