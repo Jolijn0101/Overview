@@ -10,7 +10,7 @@
 
 .mobile_menu_btn {
   margin-left: calc(100% - 2rem);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   height: 2rem;
   width: 2rem;
   color: var(--third-color);
@@ -95,15 +95,15 @@
 }
 
 @media screen and (min-width: 768px) {
+  .mobile_menu_btn {
+    visibility: hidden;
+  }
   .project {
     padding-left: 15rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .mobile_menu_btn {
-    visibility: hidden;
-  }
   .project p {
     width: calc(100% - 25rem);
   }
