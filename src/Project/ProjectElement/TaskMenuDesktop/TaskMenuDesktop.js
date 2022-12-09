@@ -17,7 +17,7 @@ const TaskMenuDesktop = ({ taskId }) => {
   const [menuState, setMenuState] = useState(false);
   const [priorityArr, setPriorityArr] = useState([1,'white']);
 
-//set priority by first render
+//set priority and deadline by first render
   useEffect(() => {
     if(todoObject.due !== null){
     setNewDeadline(todoObject.due.date);
@@ -40,7 +40,6 @@ const TaskMenuDesktop = ({ taskId }) => {
         break;
     }
   }, []);
-
 
 
   function drop_down(){
@@ -86,31 +85,6 @@ const TaskMenuDesktop = ({ taskId }) => {
   function trackNewDeadline(e){
     setNewDeadline(e.target.value);
   }
-
-  useEffect(() => {
-    //Check if the length of the string matches and isn't the same as the old newDeadline string
-    if(newDeadline.length === 10 && newDeadline !== 'yyyy-mm-dd'){
-      //the deadline has to be different then the previous one
-      if(todoObject.due === null || todoObject.due.date !== newDeadline){
-        //check if the string matches the pattern
-        if(newDeadline.match(/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g)){
-          console.log('het matched')
-          //check if the month and day number aren't to big
-          let month = Number(newDeadline[5] + newDeadline[6]);
-          let day = Number(newDeadline[8] + newDeadline[9]);
-          if(month < 13 || day < 31){
-            dispatch(saveNewDeadline({ id: todoObject.id, content: todoObject.content, due: { date: newDeadline }, priority: 1, projectId: todoObject.projectId }));
-          }
-          else{
-            alert('day or month input are to big')
-          }
-        }else{
-          alert('deadline input does not match the pattern');
-        }
-      }
-    }
-  }, [newDeadline]);
-
   function removeTask() {
     function removeTaskTrue(isSuccess) {
       console.log(isSuccess);
@@ -129,6 +103,55 @@ const TaskMenuDesktop = ({ taskId }) => {
       .then((isSuccess) => removeTaskTrue(isSuccess))
       .catch((error) => removeTaskFalse(error));
   }
+  function saveDeadline(){
+        // displays the loading page
+        dispatch(setLoadingStatus(true));
+        //function if api call is succes
+        function saveDataTrue(isSuccess) {
+          console.log(isSuccess);
+          dispatch(saveNewDeadline(isSuccess));
+          dispatch(setLoadingStatus(false));
+        }
+        //function if api call failed
+        function saveDataFalse(error) {
+          console.log(error);
+          dispatch(setLoadingStatus(false));
+          alert('Server Error, add deadline again');
+        }
+        api
+          .updateTask(todoObject.id, { due_date: newDeadline })
+          .then((isSuccess) => saveDataTrue(isSuccess))
+          .catch((error) => saveDataFalse(error));
+  }
+
+  //searches for changes in deadline string until string matches requirements and saves the newDeadline
+  useEffect(() => {
+    //Check if the length of the string matches and isn't the same as the old newDeadline string
+    if(newDeadline.length === 10 && newDeadline !== 'yyyy-mm-dd'){
+      //the deadline has to be different then the previous one
+      if(todoObject.due === null || todoObject.due.date !== newDeadline){
+        //check if the string matches the pattern
+        if(newDeadline.match(/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/g)){
+          console.log('het matched')
+          //check if the month and day number aren't to big
+          let month = Number(newDeadline[5] + newDeadline[6]);
+          let day = Number(newDeadline[8] + newDeadline[9]);
+          if(month < 13 || day < 31){
+            //this function makes the api call and saves the new deadline
+            saveDeadline()
+            //dispatch(saveNewDeadline({ id: todoObject.id, content: todoObject.content, due: { date: newDeadline }, priority: 1, projectId: todoObject.projectId }));
+          }
+          else{
+            alert('day or month input are to big')
+          }
+        }else{
+          alert('deadline input does not match the pattern');
+        }
+      }
+    }
+  }, [newDeadline]);
+
+
 
 
   return (
