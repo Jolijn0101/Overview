@@ -47,7 +47,7 @@ function App() {
       <div className="App">
         <div>
           {loadingState ? <LoadingScreen /> : null}
-          <SideMenu />
+          {logInStatus ? <SideMenu /> : null}
           <Routes>
             {logInStatus ? <Route path="/" element={<Project />} /> : <Route path="/" element={<LoginPage />} />}
             <Route path="/Project/:projectName" element={<Project />} />
