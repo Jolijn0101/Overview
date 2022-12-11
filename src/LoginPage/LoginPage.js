@@ -9,8 +9,8 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const scope = 'data:read_write,data:delete,project:delete';
   const code = useRef(false);
-  const clientId = process.env.REACT_APP_API_ID;
-  const clientSecret = process.env.REACT_APP_API_SECRET;
+  const clientId = process.env.REACT_APP_API_ID; /* place your api ID here */
+  const clientSecret = process.env.REACT_APP_API_SECRET; /* place your api SECRET here */
   const redirectUri = 'http://localhost:3000/';
 
   function logIn() {
