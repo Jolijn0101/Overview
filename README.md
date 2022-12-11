@@ -1,6 +1,6 @@
 # Overview
 Overview is a web-app where you can organise all of your tasks in one overview.
-It is easy to use and after filling in your taks in project folders you will have a better understanding wat you need to do and when.
+It is easy to use and after filling in your tasks in project folders you will have a better understanding wat you need to do and when.
 De web-app has a color full display and you can use it on mobile and larger screens.
 
 ## todoist account and register app
